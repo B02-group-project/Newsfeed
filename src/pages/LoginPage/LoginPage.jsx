@@ -1,9 +1,5 @@
-import { createClient } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
-
-const supabaseUrl = import.meta.env.VITE_PROJECT_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY;
-const supabase = createClient(supabaseUrl, supabaseKey);
+import supabase from "../../api/supabase.api";
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -52,6 +48,7 @@ function App() {
       ) : (
         <SignInBtn text="로그인" onClick={signInWithGithub} />
       )}
+      <button>회원가입</button>
     </main>
   );
 }
