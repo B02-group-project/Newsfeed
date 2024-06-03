@@ -69,24 +69,3 @@ export const SideBarBtn = styled.div`
         left: 0;
     }
 `;
-
-export const BerryImg = styled.img`
-    width: 300px;
-    height: 80px;
-`;
-export const Botton = styled.button`
-    background-color: #136dc1;
-    width: 130px;
-    height: 40px;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    font-size: 15px;
-    margin: 20px;
-
-    &:hover {
-        background-color: white;
-        color: #136dc1;
-        border: solid 1px #656565;
-    }
-`;
