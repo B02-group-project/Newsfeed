@@ -1,75 +1,47 @@
-import supabase from "../../api/supabase.api";
-import Button from "../../components/commons/Button";
-import useInput from "../../hooks/useInput";
-import {
-  Header,
-  Input,
-  LoginData,
-  SignInWrapper,
-  Wrapper,
-} from "./SignInPage.styled";
+import { useState } from "react";
+import EmailPasswordForm from "../../components/SignInPage/EmailPasswordForm";
+import NicknameAvatarForm from "../../components/SignInPage/NicknameAvatarForm";
+import PersonalInfoForm from "../../components/SignInPage/PersonalInfoForm";
+import { ImgWrapper, SignInWrapper, Wrapper } from "./SignInPage.styled";
 
 const SignInPage = () => {
-  const [email, setEmail] = useInput("");
-  const [password, setPassword] = useInput("");
-  // const [name, setName] = useInput("");
-  // const [birthday, setBirthDay] = useInput("");
-  // const [phone, setPhone] = useInput("");
+  // const handleSignUp = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const { data, error } = await supabase.auth.signUp({
+  //       email,
+  //       password,
 
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-      if (error) console.error(error);
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
+  //       options: {
+  //         redirectTo: "http://localhost:5173/",
+  //       },
+  //     });
+  //     if (error) console.error(error);
+  //     console.log(data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  const [activeForm, setActiveForm] = useState(1);
+
+  const nextForm = () => {
+    setActiveForm((prevState) => prevState + 1);
   };
 
   return (
     <Wrapper>
-      <div>{/*이미지 들어가는 칸 */}</div>
+      <ImgWrapper>
+        <img
+          src={
+            "https://gpsgbozbtdkzjixxhdar.supabase.co/storage/v1/object/sign/images/BlackBerry_icon.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJpbWFnZXMvQmxhY2tCZXJyeV9pY29uLnBuZyIsImlhdCI6MTcxNzM5NDM5NywiZXhwIjoxNzE5OTg2Mzk3fQ.PuH4X2Xbwgx--6CcW25def6GbBdBerjNtQdyIUI_wiI&t=2024-06-03T05%3A59%3A58.283Z"
+          }
+        />
+      </ImgWrapper>
       <SignInWrapper>
-        <LoginData>
-          <Header>Sign In</Header>
-          <Input
-            type="text"
-            value={email}
-            onChange={setEmail}
-            placeholder="이메일"
-          />
-          <Input
-            type="password"
-            value={password}
-            onChange={setPassword}
-            placeholder="패스워드"
-          />
-        </LoginData>
-        {/* <UserData>
-          <Input
-            type="text"
-            value={name}
-            onChange={setName}
-            placeholder="이름"
-          />
-          <Input
-            type="text"
-            value={birthday}
-            onChange={setBirthDay}
-            placeholder="생년월일 8자리"
-          />
-          <Input
-            type="text"
-            value={phone}
-            onChange={setPhone}
-            placeholder="휴대전화 번호"
-          />
-        </UserData> */}
-        <Button text={"회원가입"} handleClick={handleSignUp} />
+        {activeForm === 1 && <EmailPasswordForm handleClick={nextForm} />}
+        {activeForm === 2 && <PersonalInfoForm handleClick={nextForm} />}
+        {activeForm === 3 && <NicknameAvatarForm />}
+
         <div>
           계정이 있으신가요? <a>로그인</a>
         </div>
