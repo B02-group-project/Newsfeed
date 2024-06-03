@@ -1,7 +1,8 @@
 import React from 'react';
-import { HeaderWrapper, SideBarBtn, Botton } from './Header.styled';
+import { HeaderWrapper, SideBarBtn } from './Header.styled';
 import SideBar from '../Side/SideBar';
 import Log from '../Log';
+import Button from '../Button';
 
 const Header = () => {
     return (
@@ -15,8 +16,8 @@ const Header = () => {
                 </label>
                 <SideBar />
             </SideBarBtn>
-            <Log />
-            <Botton>게시하기</Botton>
+            <Log width={'300px'} height={'80px'} />
+            <Button text={'게시하다'} width={'130px'} height={'40px'} fontsize={'20px'} />
         </HeaderWrapper>
     );
 };
