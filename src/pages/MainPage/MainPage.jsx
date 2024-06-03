@@ -1,5 +1,12 @@
+import FetchData from "../../components/FetchData";
+
 const MainPage = () => {
-  return <div>MainPage</div>;
+  return (
+    <div>
+      MainPage
+      <FetchData />
+    </div>
+  );
 };
 
 export default MainPage;
