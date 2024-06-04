@@ -23,7 +23,7 @@ const SideBar = () => {
         <SideBarWrapper id="sidebar">
             <Line />
             <List>
-                <Log width={'215px'} height={'54px'} />
+                <Log width={'200px'} height={'50px'} />
                 <TextList>
                     <TextItem>
                         <IconImg src={HomeIcon} />
