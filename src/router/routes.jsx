@@ -25,11 +25,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/create",
-    element: <CreatePage />,
+    element: <CreatePage />
   },
   {
     path: "/edit",
-    element: <EditPage />,
+    element: <EditPage />
   },
 ]);
 
