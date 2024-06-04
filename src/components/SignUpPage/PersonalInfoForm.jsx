@@ -5,9 +5,9 @@ import Button from "../commons/Button";
 import { Header, Input, UserData } from "./style";
 
 const PersonalInfoForm = ({ handleClick }) => {
-  const [name, setName] = useInput();
-  const [birthday, setBirthday] = useInput();
-  const [phone, setPhone] = useInput();
+  const [name, setName] = useInput("");
+  const [birthday, setBirthday] = useInput("");
+  const [phone, setPhone] = useInput("");
 
   const dispatch = useDispatch();
 
@@ -16,6 +16,7 @@ const PersonalInfoForm = ({ handleClick }) => {
     handleClick();
     dispatch(updatePersonalInfo({ name, birthday, phone }));
   };
+  console.log("PersonalInfoForm");
   return (
     <UserData onSubmit={handleSubmit}>
       <Header>사용자 정보</Header>

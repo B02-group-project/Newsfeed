@@ -4,15 +4,16 @@ import { updateNicknameAvatar } from "../../redux/slice/userSlice";
 import Button from "../commons/Button";
 import { AvatarData, Header, Input } from "./style";
 
-const NicknameAvatarForm = () => {
-  const [avatarImg, setAvatarImg] = useInput();
-  const [nickname, setNickname] = useInput();
-  const [desc, setDesc] = useInput();
+const NicknameAvatarForm = ({ handleClick }) => {
+  const [avatarImg, setAvatarImg] = useInput("");
+  const [nickname, setNickname] = useInput("");
+  const [desc, setDesc] = useInput("");
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    handleClick();
     dispatch(updateNicknameAvatar({ avatarImg, nickname, desc }));
   };
   return (
@@ -36,7 +37,7 @@ const NicknameAvatarForm = () => {
         onChange={setDesc}
         placeholder="추가 정보를 넣어주세요~!"
       />
-      <Button text={"가입하기"} />
+      <Button type="submit" text={"가입하기"} />
     </AvatarData>
   );
 };
