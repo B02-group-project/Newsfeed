@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const SideBarWrapper = styled.div`
     width: 300px;
     height: 100%;
-    background-color: white;
+    background-color: #ffffff;
     position: fixed;
     top: 0;
     left: -300px;
@@ -24,7 +24,7 @@ export const Line = styled.p`
 
 export const List = styled.div`
     flex: 1;
-    margin: 50px 20px;
+    margin: 80px 20px;
     display: flex;
     flex-direction: column;
 `;

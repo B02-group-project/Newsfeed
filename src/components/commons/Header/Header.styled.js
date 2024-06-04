@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const HeaderWrapper = styled.div`
+    background-color: #ffffff;
     height: 100px;
     display: flex;
     justify-content: space-between;
