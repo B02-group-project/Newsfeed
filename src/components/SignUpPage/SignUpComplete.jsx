@@ -1,44 +1,27 @@
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import supabase from "../../api/supabase.client";
-import Button from "../commons/Button";
+import signUp from "../../api/signUp";
 import { UserData } from "./style";
-
+async function addUser(user) {
+  await signUp(user);
+}
 const SignUpComplete = () => {
   const user = useSelector((state) => state.user);
-  console.log(user);
-  // 회원가입 로직
-  const signUpNewUser = async (e) => {
-    e.preventDefault();
-    const { data, error } = await supabase.auth.signUp({
-      email: user.email,
-      password: user.password,
-      // options: {
-      //   data: {
-      //     user,
-      //   },
-      //   emailRedirectTo: "http://localhost:5173/",
-      // },
-    });
-    console.log("signup: ", { data, error }); // data에 뭐 들어있는지 확인하기
-  };
 
-  if (!user) {
-    return (
-      <UserData>
-        <h1>환영합니다!!!</h1>
-        <Button text={"마이페이지로 이동"} onClick={signUpNewUser} />
-      </UserData>
-    );
-  } else {
-    return (
-      <UserData>
-        <div>
-          Logged in!
-          <button>로그아웃</button>
-        </div>
-      </UserData>
-    );
-  }
+  const isMounted = useRef(false);
+  useEffect(() => {
+    if (isMounted.current) {
+      addUser(user);
+    } else {
+      isMounted.current = true;
+    }
+  }, [user]); // user가 변경될 때마다 실행되도록 의존성 배열에 user 추가
+
+  return (
+    <UserData>
+      <h1>환영합니다!!!</h1>
+    </UserData>
+  );
 };
 
 export default SignUpComplete;

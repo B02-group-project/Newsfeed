@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  email: "",
-  password: "",
+  id: "",
+  created_at: "",
+  nickname: "",
   name: "",
   phone: "",
   birthday: "",
-  nickname: "",
-  avartar_url: "",
+  avatar_url: "",
+  desc: "",
 };
 
 const userSlice = createSlice({
@@ -25,7 +26,8 @@ const userSlice = createSlice({
     },
     updateNicknameAvatar: (state, action) => {
       state.nickname = action.payload.nickname;
-      state.avartar_url = action.payload.avartar_url;
+      state.avatar_url = action.payload.avatarUrl;
+      state.desc = action.payload.desc;
     },
   },
 });
