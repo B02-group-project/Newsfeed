@@ -30,7 +30,7 @@ export const List = styled.div`
 `;
 
 export const TextList = styled.div`
-    margin-top: 50px;
+    margin-top: 80px;
 `;
 
 export const TextItem = styled.button`

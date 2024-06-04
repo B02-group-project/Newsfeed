@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import supabase from "../api/supabase.api";
+import supabase from "../api/supabase.client";
 
 const FetchData = () => {
   const [users, setUsers] = useState([]);

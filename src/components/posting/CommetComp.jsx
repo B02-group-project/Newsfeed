@@ -1,12 +1,13 @@
 import React from 'react';
+
 import { CommetCompWrapper } from './style/CommetComp.styled';
+import CommetItem from './CommetItem';
 
 const CommetComp = () => {
     return (
         <CommetCompWrapper>
             <div>
-                <div>유저. 정보. ID. 게시일</div>
-                <div>댓글내용</div>
+                <CommetItem />
             </div>
             <div>
                 <input type="text" placeholder="댓글을 작성해주세요" />
