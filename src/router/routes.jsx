@@ -9,15 +9,15 @@ import EditPage from "../pages/EditPage/EditPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainPage />,
-  },
-  {
-    path: "/login",
     element: <LoginPage />,
   },
   {
     path: "/signup",
     element: <SignUpPage />,
+  },
+  {
+    path: "/main",
+    element: <MainPage />,
   },
   {
     path: "/mypage/:userId",

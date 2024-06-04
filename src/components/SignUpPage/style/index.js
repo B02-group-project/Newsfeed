@@ -6,12 +6,15 @@ export const Wrapper = styled.div`
 
   margin-left: auto;
   margin-right: auto;
-  background-color: #b8c3e0;
+
   padding: 10px;
 
   border-radius: 50px;
+
   height: 788px;
   width: 1214px;
+
+  background-color: #b8c3e0;
 `;
 export const SignInWrapper = styled.div`
   background-color: white;
@@ -19,8 +22,10 @@ export const SignInWrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+
   justify-content: center;
   align-items: center;
+
   height: 714px;
   width: 526px;
 `;
@@ -28,7 +33,8 @@ export const SignInWrapper = styled.div`
 export const Input = styled.input`
   width: 413px;
   height: 52px;
-  margin: 5px;
+  margin-left: 20px;
+  margin-bottom: 5px;
   border-radius: 60px;
 
   font-size: 20px;
@@ -60,8 +66,9 @@ export const AvatarData = styled.form`
   flex-direction: column;
 `;
 
-export const Header = styled.div`
+export const Header = styled.span`
   margin-bottom: 30px;
+  margin-left: 20px;
   font-size: 40px;
   font-weight: 900;
 `;

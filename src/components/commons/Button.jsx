@@ -1,3 +1,4 @@
+
 import styled from 'styled-components';
 
 const Button = ({ text, handleClick, width, height, fontSize }) => {
@@ -6,11 +7,13 @@ const Button = ({ text, handleClick, width, height, fontSize }) => {
             {text}
         </Btn>
     );
+
 };
 
-export default Button;
+export default React.memo(Button);
 
 export const Btn = styled.button`
+
     background-color: #136dc1;
     width: ${(pros) => pros.width || '423px'};
     height: ${(pros) => pros.height || '53px'};
@@ -20,9 +23,10 @@ export const Btn = styled.button`
     font-size: ${(pros) => pros.fontSize || '30px'};
     margin: 20px;
 
-    &:hover {
-        background-color: white;
-        color: #136dc1;
-        border: solid 1px #989898;
-    }
+
+  &:hover {
+    background-color: white;
+    color: #136dc1;
+    border: solid 1px #989898;
+  }
 `;

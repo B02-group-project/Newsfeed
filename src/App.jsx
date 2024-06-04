@@ -6,11 +6,11 @@ import router from "./router/routes";
 
 function App() {
   return (
-    <ModalProvier>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ModalProvier>
         <RouterProvider router={router} />
-      </Provider>
-    </ModalProvier>
+      </ModalProvier>
+    </Provider>
   );
 }
 
