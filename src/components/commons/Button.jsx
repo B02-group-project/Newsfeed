@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const Button = ({ text, handleClick, width, height, fontsize }) => {
+const Button = ({ text, handleClick, width, height, fontSize }) => {
     return (
-        <Btn width={width} height={height} fontsize={fontsize} onClick={handleClick}>
+        <Btn width={width} height={height} fontSize={fontSize} onClick={handleClick}>
             {text}
         </Btn>
     );
@@ -17,7 +17,7 @@ export const Btn = styled.button`
     border-radius: 50px;
     color: white;
     border: solid 1px transparent;
-    font-size: ${(pros) => pros.fontsize || '30px'};
+    font-size: ${(pros) => pros.fontSize || '30px'};
     margin: 20px;
 
     &:hover {
