@@ -7,32 +7,33 @@ import CreatePage from '../pages/CreatePage/CreatePage';
 import EditPage from '../pages/EditPage/EditPage';
 
 const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <LoginPage />,
-    },
-    {
-        path: '/signup',
-        element: <SignUpPage />,
-    },
-    {
-        path: '/main',
-        element: <MainPage />,
-    },
 
-    {
-        //  path: "/mypage/:userId",
-        path: '/mypage',
-        element: <MyPage />,
-    },
-    {
-        path: '/create',
-        element: <CreatePage />,
-    },
-    {
-        path: '/edit',
-        element: <EditPage />,
-    },
+  {
+    path: "/",
+    element: <LoginPage />,
+  },
+  {
+    path: "/signup",
+    element: <SignUpPage />,
+  },
+  {
+    path: "/main",
+    element: <MainPage />,
+  },
+  
+  {
+     path: "/mypage/:userId",
+    element: <MyPage />,
+  },
+  {
+    path: "/create",
+    element: <CreatePage />
+  },
+  {
+    path: "/edit",
+    element: <EditPage />
+  },
+
 ]);
 
 export default router;
