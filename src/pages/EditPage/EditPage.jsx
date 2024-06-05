@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import supabase from '../../api/supabase.client';
 import {
     Form,
     ImageUpload,
@@ -7,25 +8,32 @@ import {
     ImagePreview,
     RemoveButton,
     PostContent,
-    SubmitButton
+    SubmitButton,
+    DeleteButton,
+    ButtonContainer
 } from './EditPage.styled';
 
-const EditPage = ({ postId }) => {
+const EditPage = ({ postId, onDelete }) => {
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
     const [content, setContent] = useState('');
 
     useEffect(() => {
-        // 여기에 기존 게시물 데이터를 가져오는 로직을 추가합니다.
-        // 예를 들어, API 호출을 통해 데이터를 가져오고 상태를 설정할 수 있습니다.
+        // 여기에 기존 게시물 데이터를 가져오는 로직추가 (supabase 공식 문서)
         const fetchPost = async () => {
-            // 예시 데이터
-            const post = {
-                content: '기존 게시물 내용',
-                imageUrl: '기존 이미지 URL'
-            };
-            setContent(post.content);
-            setPreview(post.imageUrl);
+            const { data, error } = await supabase
+                .from('posts')
+                .select('content, image_url')
+                .eq('id', postId)
+                .single();
+
+            if (error) {
+                console.error(error);
+                return;
+            }
+
+            setContent(data.content);
+            setPreview(data.image_url);
         };
 
         fetchPost();
@@ -57,11 +65,53 @@ const EditPage = ({ postId }) => {
         setPreview(null);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // 여기에 게시물 수정 로직을 추가합니다.
-        console.log('Content:', content);
-        console.log('Image:', image);
+        // 여기에 게시물 수정 로직 추가
+        let imageUrl = preview;
+        if (image) {
+            const { data, error } = await supabase
+                .storage
+                .from('images')
+                .upload(`public/${image.name}`, image);
+
+            if (error) {
+                console.error(error);
+                alert('이미지 업로드 중 오류가 발생했습니다.');
+                return;
+            }
+
+            imageUrl = data.path;
+        }
+
+        const { error } = await supabase
+            .from('posts')
+            .update({ content, updated_at: new Date() })
+            .eq('id', postId);
+
+        if (error) {
+            console.error(error);
+            alert('게시물 수정 중 오류가 발생했습니다.');
+            return;
+        }
+
+        alert('게시물이 수정되었습니다.');
+    };
+
+    const handleDelete = async () => {
+        const { error } = await supabase
+            .from('posts')
+            .delete()
+            .eq('id', postId);
+
+        if (error) {
+            console.error(error);
+            alert('게시물 삭제 중 오류가 발생했습니다.');
+            return;
+        }
+
+        onDelete(postId);
+        alert('게시물이 삭제되었습니다.');
     };
 
     return (
@@ -77,7 +127,7 @@ const EditPage = ({ postId }) => {
                     </ImagePreview>
                 ) : (
                     <UploadInstructions>
-                        <p>사진과 동영상을 여기에 끌어다 놓으세요</p>
+                        <p>사진을 여기에 끌어다 놓으세요</p>
                         <input
                             type="file"
                             accept="image/*"
@@ -96,7 +146,10 @@ const EditPage = ({ postId }) => {
                 onChange={(e) => setContent(e.target.value)}
                 placeholder="내용을 작성하세요..."
             />
-            <SubmitButton type="submit">수정하기</SubmitButton>
+            <ButtonContainer>
+                <SubmitButton type="submit">수정하기</SubmitButton>
+                <DeleteButton type="button" onClick={handleDelete}>삭제하기</DeleteButton>
+            </ButtonContainer>
         </Form>
     );
 };
