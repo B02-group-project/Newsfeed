@@ -16,7 +16,6 @@ const PersonalInfoForm = ({ handleClick }) => {
     handleClick();
     dispatch(updatePersonalInfo({ name, birthday, phone }));
   };
-  console.log("PersonalInfoForm");
   return (
     <UserData onSubmit={handleSubmit}>
       <Header>사용자 정보</Header>

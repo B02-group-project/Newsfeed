@@ -3,14 +3,12 @@ import LoginPage from "../pages/LoginPage";
 import MainPage from "../pages/MainPage";
 import MyPage from "../pages/MyPage";
 import SignUpPage from "../pages/SignUpPage/SignUpPage";
+import CreatePage from "../pages/CreatePage/CreatePage";
+import EditPage from "../pages/EditPage/EditPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainPage />,
-  },
-  {
-    path: "/login",
     element: <LoginPage />,
   },
   {
@@ -18,8 +16,22 @@ const router = createBrowserRouter([
     element: <SignUpPage />,
   },
   {
-    path: "/mypage",
+    path: "/main",
+    element: <MainPage />,
+  },
+  
+  {
+    //  path: "/mypage/:userId",
+    path: "/mypage,
     element: <MyPage />,
+  },
+  {
+    path: "/create",
+    element: <CreatePage />
+  },
+  {
+    path: "/edit",
+    element: <EditPage />
   },
 ]);
 
