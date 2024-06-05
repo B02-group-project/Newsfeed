@@ -17,6 +17,7 @@ import {
     UserDate,
     LogOut,
 } from './SideBar.styled';
+import UserProfile from '../UserProfile';
 
 const SideBar = () => {
     return (
@@ -46,6 +47,7 @@ const SideBar = () => {
                     </TextPlus>
                 </TextList>
                 <UserDate>
+                    <UserProfile/>
                     <LogOut>로그아웃</LogOut>
                 </UserDate>
             </List>
