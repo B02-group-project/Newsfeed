@@ -8,6 +8,11 @@ const Postbox = () => {
     const [posts, setPosts] = useState([]);
     const [likedPosts, setLikedPosts] = useState([]);
 
+    // const { data, error } = await supabase
+    // .from('userInfo') // userInfo에서
+    // .select() // 전부다가져와라
+    // .eq('id', `${props.id}`) // id === props.id
+
     useEffect(() => {
         const fetchData = async () => {
             const { data, error } = await supabase.from('posts').select('*');
@@ -30,14 +35,26 @@ const Postbox = () => {
             setLikedPosts(likedPosts.filter((id) => id !== postId));
         }
     };
+    const handleDeletePost = async (postId) => {
+        const { error } = await supabase.from('posts').delete().eq('id', postId);
 
+        if (error) {
+            throw error;
+        }
+        window.location.reload();
+    };
     return (
         <div>
             {posts.map((post) => (
-                <PostboxWrapper key={post.post_id}>
+                <PostboxWrapper key={post.id}>
                     <React.Fragment>
-                        <PostItem post={post} likedPosts={likedPosts} onLikeChange={handleLikeChange} />
-                        <CommetComp />
+                        <PostItem
+                            post={post}
+                            likedPosts={likedPosts}
+                            onLikeChange={handleLikeChange}
+                            onDelete={handleDeletePost}
+                        />
+                        {/* <CommetComp /> */}
                     </React.Fragment>
                 </PostboxWrapper>
             ))}

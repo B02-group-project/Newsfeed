@@ -5,7 +5,7 @@ import Button from "../commons/Button";
 import { AvatarData, Header, Input } from "./style";
 
 const NicknameAvatarForm = ({ handleClick }) => {
-  const [avatarImg, setAvatarImg] = useInput("");
+  const [avatarUrl, setAvatarUrl] = useInput("");
   const [nickname, setNickname] = useInput("");
   const [desc, setDesc] = useInput("");
 
@@ -14,15 +14,15 @@ const NicknameAvatarForm = ({ handleClick }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleClick();
-    dispatch(updateNicknameAvatar({ avatarImg, nickname, desc }));
+    dispatch(updateNicknameAvatar({ avatarUrl, nickname, desc }));
   };
   return (
     <AvatarData onSubmit={handleSubmit}>
       <Header>추가 내용</Header>
       <Input
         type="text"
-        value={avatarImg}
-        onChange={setAvatarImg}
+        value={avatarUrl}
+        onChange={setAvatarUrl}
         placeholder="이미지"
       />
       <Input

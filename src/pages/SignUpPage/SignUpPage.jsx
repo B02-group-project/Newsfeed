@@ -1,12 +1,18 @@
-import EmailPasswordForm from "../../components/SignUpPage/EmailPasswordForm";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import NicknameAvatarForm from "../../components/SignUpPage/NicknameAvatarForm";
+import PersonalInfoForm from "../../components/SignUpPage/PersonalInfoForm";
+import SignUpComplete from "../../components/SignUpPage/SignUpComplete";
+import { Header } from "../../components/SignUpPage/style";
+import EmailPasswordForm from "../../components/commons/EmailPasswordForm";
 import { ImgWrapper, SignInWrapper, Wrapper } from "./SignUpPage.styled";
 
 const SignUpPage = () => {
-  // const [activeForm, setActiveForm] = useState(1);
+  const [activeForm, setActiveForm] = useState(1);
 
-  // const nextForm = () => {
-  //   setActiveForm((prevState) => prevState + 1);
-  // };
+  const nextForm = () => {
+    setActiveForm((prevState) => prevState + 1);
+  };
 
   return (
     <Wrapper>
@@ -18,13 +24,16 @@ const SignUpPage = () => {
         />
       </ImgWrapper>
       <SignInWrapper>
-        {/* {activeForm === 1 && <EmailPasswordForm handleClick={nextForm} />}
+        <Header>회원가입 </Header>
+        {activeForm === 1 && <EmailPasswordForm handleClick={nextForm} />}
         {activeForm === 2 && <PersonalInfoForm handleClick={nextForm} />}
         {activeForm === 3 && <NicknameAvatarForm handleClick={nextForm} />}
-        {activeForm === 4 && <SignUpComplete />} */}
-        <EmailPasswordForm />
+        {activeForm === 4 && <SignUpComplete />}
         <div>
-          계정이 있으신가요? <a>로그인</a>
+          계정이 있으신가요?{" "}
+          <Link to="/">
+            <span>로그인</span>
+          </Link>
         </div>
       </SignInWrapper>
     </Wrapper>

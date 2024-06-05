@@ -1,10 +1,12 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Log from '../Log';
 import HomeIcon from '../../../assets/Icons/home_icon.png';
 import SearchIcon from '../../../assets/Icons/search_icon.png';
 import BellIcon from '../../../assets/Icons/bell_icon.png';
 import PlusIcon from '../../../assets/Icons/plus_icon.png';
 import PeopleIcon from '../../../assets/Icons/people_icon.png';
+import supabase from '../../../api/supabase.client';
 import {
     SideBarWrapper,
     Line,
@@ -19,6 +21,34 @@ import {
 } from './SideBar.styled';
 
 const SideBar = () => {
+    const [userId, setUserId] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const {
+                data: { user },
+                error,
+            } = await supabase.auth.getUser();
+
+            if (error) {
+                console.log('error => ', error);
+            } else {
+                const userId = user?.id;
+                if (userId) {
+                    setUserId(userId);
+                }
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        navigate('/');
+    };
+
     return (
         <SideBarWrapper id="sidebar">
             <Line />
@@ -46,7 +76,8 @@ const SideBar = () => {
                     </TextPlus>
                 </TextList>
                 <UserDate>
-                    <LogOut>로그아웃</LogOut>
+                    <div>{userId}</div>
+                    <LogOut onClick={handleLogout}>로그아웃</LogOut>
                 </UserDate>
             </List>
         </SideBarWrapper>
