@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Log from '../Log';
 import HomeIcon from '../../../assets/Icons/home_icon.png';
@@ -19,30 +19,10 @@ import {
     UserDate,
     LogOut,
 } from './SideBar.styled';
+import UserProfile from '../UserProfile';
 
 const SideBar = () => {
-    const [userId, setUserId] = useState(null);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const {
-                data: { user },
-                error,
-            } = await supabase.auth.getUser();
-
-            if (error) {
-                console.log('error => ', error);
-            } else {
-                const userId = user?.id;
-                if (userId) {
-                    setUserId(userId);
-                }
-            }
-        };
-
-        fetchData();
-    }, []);
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
@@ -76,7 +56,7 @@ const SideBar = () => {
                     </TextPlus>
                 </TextList>
                 <UserDate>
-                    <div>{userId}</div>
+                    <UserProfile/>
                     <LogOut onClick={handleLogout}>로그아웃</LogOut>
                 </UserDate>
             </List>
