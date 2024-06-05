@@ -50,6 +50,14 @@ export const Input = styled.input`
   }
 `;
 
+export const PasswordRules = styled.div`
+  margin-top: 10px;
+`;
+
+export const Rule = styled.p`
+  color: ${(props) => (props.valid ? "green" : "red")};
+`;
+
 export const LoginData = styled.form`
   display: flex;
   flex-direction: column;

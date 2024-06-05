@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import useInput from "../../hooks/useInput";
 import { updateNicknameAvatar } from "../../redux/slice/userSlice";
@@ -10,6 +11,13 @@ const NicknameAvatarForm = ({ handleClick }) => {
   const [desc, setDesc] = useInput("");
 
   const dispatch = useDispatch();
+
+  const onDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0];
+    setAvatarUrl(URL.createObjectURL(file));
+  }, []);
+
+  const { getRootPros, getInputProps } = useDropzone;
 
   const handleSubmit = (e) => {
     e.preventDefault();

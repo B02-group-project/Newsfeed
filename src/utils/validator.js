@@ -5,7 +5,7 @@ export function isValidEmail(email) {
 
 export function isValidPassword(password) {
   const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  return regex.test(password);
+  return regex.test(password) && password.length > 8;
 }
 
 export const validatePasswordMatch = (password, checkPassword) => {
