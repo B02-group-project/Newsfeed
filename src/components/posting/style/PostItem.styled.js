@@ -53,17 +53,6 @@ export const DropdownMenu = styled.ul`
     }
 `;
 
-export const PostImage = styled.div`
-    width: 100%;
-    height: 200px;
-    background-color: #f2f2f2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-    font-size: 1.2em;
-`;
-
 export const PostContent = styled.div`
     padding: 10px;
     font-size: 1em;
@@ -75,6 +64,7 @@ export const LikeCheckbox = styled.input`
 `;
 
 export const Label = styled.label`
+    padding: 20px;
     display: flex;
     align-items: center;
     cursor: pointer;

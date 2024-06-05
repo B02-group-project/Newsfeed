@@ -54,7 +54,7 @@ const Postbox = () => {
                             onLikeChange={handleLikeChange}
                             onDelete={handleDeletePost}
                         />
-                        {/* <CommetComp /> */}
+                        <CommetComp postId={post.id} />
                     </React.Fragment>
                 </PostboxWrapper>
             ))}
