@@ -14,9 +14,9 @@ import {
     Label,
 } from './style/PostItem.styled';
 
-const PostItem = () => {
+const PostItem = ({ post, likedPosts, onLikeChange }) => {
     const [showMenu, setShowMenu] = useState(false);
-    const [liked, setLiked] = useState(false);
+    const [liked, setLiked] = useState(likedPosts.includes(post.id));
     const menuRef = useRef(null);
 
     const toggleMenu = () => {
@@ -36,16 +36,23 @@ const PostItem = () => {
         };
     }, []);
 
-    const handleLickChange = () => {
-        setLiked(!liked);
+    const handleLikeChange = () => {
+        const newLiked = !liked;
+        setLiked(newLiked);
+        onLikeChange(post.id, newLiked);
     };
 
     return (
         <PostItemWrapper>
             <UserInfo>
-                <div>유저 정보 . ID .</div>
-                <PostDate>게시일</PostDate>
-                <ToggleMenu onClick={toggleMenu}>•••</ToggleMenu>
+                <div>
+                    <div>유저 정보 id</div>
+                    <ToggleMenu onClick={toggleMenu}>•••</ToggleMenu>
+                </div>
+                <div>
+                    {post.updated_at}
+                    <PostDate>{post.created_at}</PostDate>
+                </div>
                 {showMenu && (
                     <DropdownMenu ref={menuRef}>
                         <li>수정하기</li>
@@ -55,9 +62,9 @@ const PostItem = () => {
                 )}
             </UserInfo>
             <PostImage>게시글 사진</PostImage>
-            <PostContent>게시글 내용</PostContent>
-            <LikeCheckbox type="checkbox" id="likeCheckbox" checked={liked} onChange={handleLickChange} />
-            <Label htmlFor="likeCheckbox">
+            <PostContent>{post.content}</PostContent>
+            <LikeCheckbox type="checkbox" id={`likeCheckbox-${post.id}`} checked={liked} onChange={handleLikeChange} />
+            <Label htmlFor={`likeCheckbox-${post.id}`}>
                 <IconImg src={liked ? likeIcon : HeatIcon} alt="Like Icon" />
                 좋아요
             </Label>
