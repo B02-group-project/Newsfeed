@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import HeatIcon from '../../assets/Icons/heart_icon.png';
 import likeIcon from '../../assets/Icons/like_icon.png';
+import PostImage from './PostImage';
+import supabase from '../../api/supabase.client';
+import { useNavigate } from 'react-router-dom';
 import {
     PostItemWrapper,
     UserInfo,
     PostDate,
     ToggleMenu,
-    PostImage,
     PostContent,
     LikeCheckbox,
     DropdownMenu,
@@ -14,10 +16,32 @@ import {
     Label,
 } from './style/PostItem.styled';
 
-const PostItem = () => {
+const PostItem = ({ post, likedPosts, onLikeChange, onDelete }) => {
     const [showMenu, setShowMenu] = useState(false);
-    const [liked, setLiked] = useState(false);
+    const [liked, setLiked] = useState(likedPosts.includes(post.user_id));
+    const [userId, setUserId] = useState(null);
     const menuRef = useRef(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const {
+                data: { user },
+                error,
+            } = await supabase.auth.getUser();
+
+            if (error) {
+                console.log('error => ', error);
+            } else {
+                const userId = user?.id;
+                if (userId) {
+                    setUserId(userId);
+                }
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const toggleMenu = () => {
         setShowMenu(!showMenu);
@@ -36,28 +60,41 @@ const PostItem = () => {
         };
     }, []);
 
-    const handleLickChange = () => {
-        setLiked(!liked);
+    const handleLikeChange = () => {
+        const newLiked = !liked;
+        setLiked(newLiked);
+        onLikeChange(post.id, newLiked);
+    };
+
+    const handleEdit = () => {
+        if (userId === post.user_id) {
+            navigate(`/edit/${post.id}`);
+        }
+    };
+
+    const handleDelete = () => {
+        onDelete(post.id);
     };
 
     return (
         <PostItemWrapper>
             <UserInfo>
-                <div>유저 정보 . ID .</div>
-                <PostDate>게시일</PostDate>
+                <div>유저 정보 id</div>
+                <PostDate>{post.created_at}</PostDate>
                 <ToggleMenu onClick={toggleMenu}>•••</ToggleMenu>
                 {showMenu && (
                     <DropdownMenu ref={menuRef}>
-                        <li>수정하기</li>
-                        <li>삭제하기</li>
+                        {userId === post.user_id && <li onClick={handleEdit}>수정하기</li>}
+                        {userId === post.user_id && <li onClick={handleDelete}>삭제하기</li>}
                         <li>공유하기</li>
                     </DropdownMenu>
                 )}
             </UserInfo>
-            <PostImage>게시글 사진</PostImage>
-            <PostContent>게시글 내용</PostContent>
-            <LikeCheckbox type="checkbox" id="likeCheckbox" checked={liked} onChange={handleLickChange} />
-            <Label htmlFor="likeCheckbox">
+
+            <PostImage />
+            <PostContent>{post.content}</PostContent>
+            <LikeCheckbox type="checkbox" id={`likeCheckbox-${post.id}`} checked={liked} onChange={handleLikeChange} />
+            <Label htmlFor={`likeCheckbox-${post.id}`}>
                 <IconImg src={liked ? likeIcon : HeatIcon} alt="Like Icon" />
                 좋아요
             </Label>

@@ -73,4 +73,9 @@ export const UserDate = styled.div`
     margin-top: auto;
 `;
 
-export const LogOut = styled.label``;
+export const LogOut = styled.button`
+    margin: 40px;
+    border: transparent;
+    background-color: white;
+    font-size: 18px;
+`;

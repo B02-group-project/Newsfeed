@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Log from '../Log';
 import HomeIcon from '../../../assets/Icons/home_icon.png';
 import SearchIcon from '../../../assets/Icons/search_icon.png';
 import BellIcon from '../../../assets/Icons/bell_icon.png';
 import PlusIcon from '../../../assets/Icons/plus_icon.png';
 import PeopleIcon from '../../../assets/Icons/people_icon.png';
+import supabase from '../../../api/supabase.client';
 import {
     SideBarWrapper,
     Line,
@@ -20,6 +22,13 @@ import {
 import UserProfile from '../UserProfile';
 
 const SideBar = () => {
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+        navigate('/');
+    };
+
     return (
         <SideBarWrapper id="sidebar">
             <Line />
@@ -48,7 +57,7 @@ const SideBar = () => {
                 </TextList>
                 <UserDate>
                     <UserProfile/>
-                    <LogOut>로그아웃</LogOut>
+                    <LogOut onClick={handleLogout}>로그아웃</LogOut>
                 </UserDate>
             </List>
         </SideBarWrapper>
