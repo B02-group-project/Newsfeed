@@ -4,16 +4,19 @@ import CreatePage from './pages/CreatePage/CreatePage';
 import EditPage from './pages/EditPage/EditPage';
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
-import { ModalProvier } from "./contexts/modal.context";
+import { ModalProvider } from "./contexts/modal.context";
 import store from "./redux/config/storeconfig";
 import router from "./router/routes";
+import { ProfileProvider } from "./contexts/ProfileContext";
 
 function App() {
   return (
     <Provider store={store}>
-      <ModalProvier>
-        <RouterProvider router={router} />
-      </ModalProvier>
+      <ModalProvider>
+       <ProfileProvider> 
+          <RouterProvider router={router} />
+        </ProfileProvider>          
+      </ModalProvider>
     </Provider>
   );
 }

@@ -1,75 +1,134 @@
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import Profile from "../../components/MyPage/Profile";
 import PhotoPosts from "../../components/MyPage/PhotoPosts";
 import TextPosts from "../../components/MyPage/TextPosts";
-import { useState } from "react";
-import styled from "styled-components";
+import { useProfile } from "../../contexts/ProfileContext";
+import supabase from '../../api/supabase.client';
+import { useParams } from "react-router-dom";
+
+const MyPage = () => {
+  const { userId } = useParams();
+  const { profile, updateProfile } = useProfile();
+  const [activeTab, setActiveTab] = useState("photo");
+  const [userData, setUserData] = useState(null);
+  const [postsData, setPostsData] = useState([]);
+  
+
+  useEffect(() => {
+
+    const fetchPostData = async () => {
+      try {
+        const { data, error } = await supabase
+         .from('posts')
+         .select("*")
+         .eq('user_id', userId);
+        if (error) {
+          console.log('Error fetching post data:', error.message);
+        } else {
+          setPostsData(data);
+        }
+      } catch (e) {
+        console.log('Error fetching post data:', e.message);
+      } finally {
+        console.log('Finished fetching post data');
+      }
+    }
+
+    const fetchData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('userInfo')
+          .select("*")
+          .eq('id', userId);
+        if (error) {
+          console.log('Error fetching user data:', error.message);
+        } else {
+          setUserData(data[0]);
+
+        }
+      } catch (e) {
+        console.log('Error fetching user data:', e.message);
+      } finally {
+        console.log('Finished fetching user data');
+      }
+    };
+
+    
+    fetchData();
+    fetchPostData();
+  }, [userId]); // Add userId as a dependency to re-fetch data when it changes
+  console.log("User data:", userData );
+  
+
+  // userData가 변경될 때마다 프로필 업데이트
+  useEffect(() => {
+    if (userData && (profile.nickname !== userData.nickname || profile.bio !== userData.desc || profile.photo !== userData.avatar_url)) {
+      // userData가 존재하고, 프로필이 변경된 경우에만 updateProfile 함수를 호출하여 프로필을 업데이트
+      updateProfile({
+        nickname: userData.nickname,
+        bio: userData.desc,
+        photo: userData.avatar_url
+      });
+    }
+  }, [userData, profile, updateProfile]); // userData와 profile, updateProfile을 의존성 배열에 추가하여 변경될 때마다 실행
+
+
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
+
+
+  return (
+    <div>
+      <Profile />
+      <TabButtons>
+        <TabButton onClick={() => handleTabClick('photo')} $active={activeTab === 'photo'}>
+          Photo
+        </TabButton>
+        <TabButton onClick={() => handleTabClick('text')} $active={activeTab === 'text'}>
+          Text
+        </TabButton>
+      </TabButtons>
+      <TabContent>
+        {activeTab === 'photo' && <PhotoPosts posts={postsData} />}
+        {activeTab === 'text' && <TextPosts posts={postsData} />}
+      </TabContent>
+    </div>
+  );
+};
+
+export default MyPage;
 
 const TabButtons = styled.div`
   display: flex;
   justify-content: center;
-  gap: 30%; // 버튼 사이의 간격
-  margin: 50px; // 내용과의 간격
-  position: relative; // 가상 요소의 기준점 설정
+  gap: 30px;
+  margin: 50px;
+  position: relative;
 
   &::before {
-    content: ''; // 가상 요소는 내용이 있어야 생성됨
+    content: '';
     position: absolute;
-    left: 50%; // 중앙 정렬
-    top: 0; // 상단에 위치
-    transform: translateX(-50%); // 정확한 중앙
-    width: 70%; // border-top의 좌우 길이 조절
-    border-top: 1px solid black; // 상단 테두리 스타일
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 70%;
+    border-top: 1px solid black;
   }
 `;
+
 const TabButton = styled.button`
   padding: 10px 20px;
   margin: 0 5px;
   margin-top: 2%;
   cursor: pointer;
   border: none;
-  background-color: ${props => props.active ? '#555' : '#f0f0f0'};
-  color: ${props => props.active ? 'white' : 'black'};
+  background-color: ${props => props.$active ? '#555' : '#f0f0f0'};
+  color: ${props => props.$active ? 'white' : 'black'};
 `;
 
 const TabContent = styled.div`
   margin-top: 20px;
 `;
-
-const MyPage = () => {
-  const [activeTab, setActiveTab] = useState("photo");
-
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-  };
-
-  const photoPosts = [
-    { imageUrl: "path_to_image1", description: "description1" },
-    { imageUrl: "path_to_image2", description: "description2" },
-    { imageUrl: "path_to_image3", description: "description3" },
-  ];
-  const textPosts = [
-    { title: '글 제목 1', excerpt: '글 요약 1' },
-    { title: '글 제목 2', excerpt: '글 요약 2' },
-    { title: '글 제목 3', excerpt: '글 요약 3' },
-  ];
-
-  return (
-    <div>
-    <Profile />
-    <TabButtons>
-      <TabButton onClick={() => handleTabClick('photo')} active={activeTab === 'photo'}>
-        Photo
-      </TabButton>
-      <TabButton onClick={() => handleTabClick('text')} active={activeTab === 'text'}>
-        Text
-      </TabButton>
-    </TabButtons>
-    <TabContent>
-      {activeTab === 'photo' && <PhotoPosts posts={photoPosts} />}
-      {activeTab === 'text' && <TextPosts posts={textPosts} />}
-    </TabContent>
-  </div>
-  );
-};
-
-export default MyPage;
