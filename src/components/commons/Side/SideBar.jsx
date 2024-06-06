@@ -1,14 +1,11 @@
-
-
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import Log from '../Log';
-import HomeIcon from '../../../assets/Icons/home_icon.png';
-import SearchIcon from '../../../assets/Icons/search_icon.png';
-import BellIcon from '../../../assets/Icons/bell_icon.png';
-import PlusIcon from '../../../assets/Icons/plus_icon.png';
-import PeopleIcon from '../../../assets/Icons/people_icon.png';
-import supabase from '../../../api/supabase.client';
+import { useNavigate } from "react-router-dom";
+import supabase from "../../../api/supabase.client";
+import BellIcon from "../../../assets/Icons/bell_icon.png";
+import HomeIcon from "../../../assets/Icons/home_icon.png";
+import PeopleIcon from "../../../assets/Icons/people_icon.png";
+import PlusIcon from "../../../assets/Icons/plus_icon.png";
+import SearchIcon from "../../../assets/Icons/search_icon.png";
 import { useModal } from "../../../contexts/modal.context";
 import Log from "../Log";
 import Modal from "../Modal/Modal";
@@ -29,33 +26,30 @@ import {
   UserDate,
 } from "./SideBar.styled";
 
-
-
 const SideBar = ({ isOpen, onClose }) => {
-    const [userId, setUserId] = useState(null);
-    const navigate = useNavigate();
-    const searchModal = useModal();
+  const [userId, setUserId] = useState(null);
+  const navigate = useNavigate();
+  const searchModal = useModal();
   const bellModal = useModal();
-        useEffect(() => {
-            const fetchData = async () => {
-                const {
-                    data: { user },
-                    error,
-                } = await supabase.auth.getUser();
-                if (error) {
-                    console.log('error => ', error);
-                } else {
-                    const userId = user?.id;
-                    if (userId) {
-                        setUserId(userId);
-                    }
-                }
-            };
-            fetchData();
-        }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser();
+      if (error) {
+        console.log("error => ", error);
+      } else {
+        const userId = user?.id;
+        if (userId) {
+          setUserId(userId);
+        }
+      }
+    };
+    fetchData();
+  }, []);
 
-
-    const handlesearchButton = () => {
+  const handlesearchButton = () => {
     searchModal.open({
       title: "검색",
       content: <SearchFrame />,
@@ -63,7 +57,13 @@ const SideBar = ({ isOpen, onClose }) => {
     onClose();
   };
 
-  const handleCreatePostPage = () => {
+  const hanldeMoveMyPage = () => {
+    navigate(`/mypage/${userId}`);
+  };
+  const handleMoveMainPage = () => {
+    navigate("/main");
+  };
+  const handleMoveCreatePostPage = () => {
     navigate("/create");
   };
   const handleBellButton = () => {
@@ -74,12 +74,10 @@ const SideBar = ({ isOpen, onClose }) => {
     onClose();
   };
 
-
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/");
   };
-  
 
   return (
     <>
@@ -88,7 +86,7 @@ const SideBar = ({ isOpen, onClose }) => {
         <List>
           <Log width={"200px"} height={"50px"} left={"45%"} />
           <TextList>
-            <TextItem>
+            <TextItem onClick={handleMoveMainPage}>
               <IconImg src={HomeIcon} />
               main
             </TextItem>
@@ -100,19 +98,20 @@ const SideBar = ({ isOpen, onClose }) => {
               search
             </TextItem>
             <TextItem>
-            {bellModal.isOpen && (
-              <Modal title={bellModal.title} content={bellModal.content} />
-            )}
+              {bellModal.isOpen && (
+                <Modal title={bellModal.title} content={bellModal.content} />
+              )}
+            </TextItem>
             <TextItem onClick={handleBellButton}>
               <IconImg src={BellIcon} />
               알람
             </TextItem>
-            <TextItem>
+            <TextItem onClick={hanldeMoveMyPage}>
               <IconImg src={PeopleIcon} />내 프로필
             </TextItem>
             <TextPlus>
               <PlusImg src={PlusIcon} />
-              <div onClick={handleCreatePostPage}>게시하기</div>
+              <div onClick={handleMoveCreatePostPage}>게시하기</div>
             </TextPlus>
           </TextList>
           <UserDate>

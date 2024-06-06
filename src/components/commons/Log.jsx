@@ -6,7 +6,7 @@ const Log = ({ width, height, left }) => {
   const navigate = useNavigate();
 
   const logClick = () => {
-    navigate("/");
+    navigate("/main");
     console.log("실행함");
   };
   return (
