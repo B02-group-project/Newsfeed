@@ -33,12 +33,12 @@ const UserProfile = () => {
       setUserProfile(data[0]); // data는 배열이므로 첫 번째 요소를 설정합니다
     };
 
-    fetchUserProfile();  //실행
+    fetchUserProfile(); //실행
   }, []);
 
   const handleClick = () => {
     if (userProfile) {
-      navigate(`/user/${userProfile.id}`);
+      navigate(`/mypage/${userProfile.id}`);
     }
   };
 

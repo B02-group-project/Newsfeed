@@ -60,6 +60,7 @@ const EmailPasswordForm = ({ handleClick, isSignInPage }) => {
           console.log("세션 데이터 : ", result.session);
           navigate("/main");
         } else {
+          alert("회원정보가 일치하지 않습니다.");
           console.log("오류 메시지:", result.error);
         }
       });
