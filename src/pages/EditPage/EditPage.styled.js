@@ -18,6 +18,22 @@ export const ImageUpload = styled.div`
   align-items: center; 
 `;
 
+export const MainButton = styled.button`
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: #0056b3;
+    }
+`;
+
 export const UploadInstructions = styled.div`
   color: black;
   position: absolute;
