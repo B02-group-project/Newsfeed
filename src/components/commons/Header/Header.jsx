@@ -30,6 +30,7 @@ const Header = () => {
             <Button text={'게시하다'} width={'130px'} height={'40px'} fontSize={'20px'} />
         </HeaderWrapper>
     );
+
 };
 
 export default Header;

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Log from '../Log';
@@ -89,6 +90,7 @@ const SideBar = ({ isOpen, onClose }) => {
             </SideBarWrapper>
         </>
     );
+
 };
 
 export default SideBar;
