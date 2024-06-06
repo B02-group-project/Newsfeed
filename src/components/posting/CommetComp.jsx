@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CommetCompWrapper } from './style/CommetComp.styled';
+import { CommetCompWrapper, InputWrapper, CommentInput, SubmitButton } from './style/CommetComp.styled';
 import CommetItem from './CommetItem';
 import supabase from '../../api/supabase.client';
 
@@ -49,8 +49,7 @@ const CommetComp = ({ postId }) => {
         fetchData();
     };
 
-    const handleAdd = async (e) => {
-        e.preventDefault();
+    const handleAdd = async () => {
         // 댓글이 비어있으면 경고 메시지 표시
         if (!addCommet) {
             alert('댓글을 입력해주세요.');
@@ -78,9 +77,8 @@ const CommetComp = ({ postId }) => {
                     <CommetItem key={commet.id} commets={commet} onDelete={handDeleteCommet} userId={userId} />
                 ))}
             </div>
-            <div>
-                이름 :{' '}
-                <input
+            <InputWrapper>
+                <CommentInput
                     type="text"
                     placeholder="댓글을 작성해주세요"
                     value={addCommet}
@@ -88,8 +86,8 @@ const CommetComp = ({ postId }) => {
                         setAddCommet(e.target.value);
                     }}
                 />
-                <button onClick={handleAdd}>등록</button>
-            </div>
+                <SubmitButton onClick={handleAdd}>등록</SubmitButton>
+            </InputWrapper>
         </CommetCompWrapper>
     );
 };

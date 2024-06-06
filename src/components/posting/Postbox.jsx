@@ -14,20 +14,20 @@ const Postbox = () => {
     // .eq('id', `${props.id}`) // id === props.id
 
     useEffect(() => {
-        const fetchData = async () => {
-            const { data, error } = await supabase.from('posts').select('*');
-
-            if (error) {
-                console.log('error => ', error);
-            } else {
-                console.log('data => ', data);
-                const sortedPosts = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-                setPosts(sortedPosts);
-            }
-        };
-
         fetchData();
     }, []);
+
+    const fetchData = async () => {
+        const { data, error } = await supabase.from('posts').select('*');
+
+        if (error) {
+            console.log('error => ', error);
+        } else {
+            console.log('data => ', data);
+            const sortedPosts = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            setPosts(sortedPosts);
+        }
+    };
 
     const handleLikeChange = (postId, liked) => {
         if (liked) {
@@ -42,7 +42,7 @@ const Postbox = () => {
         if (error) {
             throw error;
         }
-        window.location.reload();
+        fetchData();
     };
     return (
         <div>
