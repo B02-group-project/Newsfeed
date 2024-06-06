@@ -3,55 +3,44 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import supabase from "../../api/supabase.client";
 
-const UserProfile = () => {
+const UserProfile = ({userId}) => {
   const navigate = useNavigate();
-  const [userProfile, setUserProfile] = useState(null);
-
+  const [userInfo, setUserInfo] = useState([]);
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      // 현재 로그인한 유저의 정보를 가져옵니다
-      const {
-        data: { user },
-        error,
-      } = await supabase.auth.getUser();
+    // Supabase에서 유저 정보 가져오기
+    const fetchUserInfo = async () => {
+      const { data: userInfoData, error } = await supabase
+        .from('userInfo')
+        .select('*')
+        .eq('id', userId)
+        .single(); // 단일 유저 정보만 필요!!!
       if (error) {
-        console.error("Error fetching user:", error);
-        return;
+        console.error('Error fetching user info:', error.message);
+      } else {
+        setUserInfo(userInfoData);
       }
-
-      // user의 id를 사용하여 userInfo 테이블에서 유저 정보를 가져옵니다
-      const { data, error: fetchError } = await supabase
-        .from("userInfo")
-        .select("*")
-        .eq("id", user.id); // 로그인한 유저의 id를 사용합니다
-
-      if (fetchError) {
-        console.error("Error fetching user profile:", fetchError);
-        return;
-      }
-
-      setUserProfile(data[0]); // data는 배열이므로 첫 번째 요소를 설정합니다
     };
-
-    fetchUserProfile(); //실행
-  }, []);
-
+    fetchUserInfo();
+  }, [userId]);
+ 
+// console.log("유저프로필", userId);
   const handleClick = () => {
-    if (userProfile) {
-      navigate(`/mypage/${userProfile.id}`);
+    if (userInfo) {
+         navigate(`/mypage/${userInfo.id}`);
+
     }
   };
 
   return (
     <>
-      {userProfile && (
+      {userInfo && (
         <UserProfileContainer onClick={handleClick}>
           <UserAvatar
-            src={userProfile.avatar_url}
-            alt={`${userProfile.nickname}'s avatar`}
+            src={userInfo.avatar_url}
+            alt={`${userInfo.nickname}'s avatar`}
           />
           <UserInfo>
-            <UserNickname>@{userProfile.nickname}</UserNickname>
+            <UserNickname>@{userInfo.nickname}</UserNickname>
           </UserInfo>
         </UserProfileContainer>
       )}

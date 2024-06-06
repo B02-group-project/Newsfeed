@@ -1,16 +1,21 @@
-import { useNavigate } from "react-router-dom";
-import supabase from "../../../api/supabase.client";
-import BellIcon from "../../../assets/Icons/bell_icon.png";
-import HomeIcon from "../../../assets/Icons/home_icon.png";
-import PeopleIcon from "../../../assets/Icons/people_icon.png";
-import PlusIcon from "../../../assets/Icons/plus_icon.png";
-import SearchIcon from "../../../assets/Icons/search_icon.png";
+
+
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import Log from '../Log';
+import HomeIcon from '../../../assets/Icons/home_icon.png';
+import SearchIcon from '../../../assets/Icons/search_icon.png';
+import BellIcon from '../../../assets/Icons/bell_icon.png';
+import PlusIcon from '../../../assets/Icons/plus_icon.png';
+import PeopleIcon from '../../../assets/Icons/people_icon.png';
+import supabase from '../../../api/supabase.client';
 import { useModal } from "../../../contexts/modal.context";
 import Log from "../Log";
 import Modal from "../Modal/Modal";
 import UserProfile from "../UserProfile";
 import BellFrame from "./BellFrame";
 import SearchFrame from "./SearchFrame";
+
 import {
   IconImg,
   Line,
@@ -24,12 +29,33 @@ import {
   UserDate,
 } from "./SideBar.styled";
 
-const SideBar = ({ isOpen, onClose }) => {
-  const navigate = useNavigate();
-  const searchModal = useModal();
-  const bellModal = useModal();
 
-  const handlesearchButton = () => {
+
+const SideBar = ({ isOpen, onClose }) => {
+    const [userId, setUserId] = useState(null);
+    const navigate = useNavigate();
+    const searchModal = useModal();
+  const bellModal = useModal();
+        useEffect(() => {
+            const fetchData = async () => {
+                const {
+                    data: { user },
+                    error,
+                } = await supabase.auth.getUser();
+                if (error) {
+                    console.log('error => ', error);
+                } else {
+                    const userId = user?.id;
+                    if (userId) {
+                        setUserId(userId);
+                    }
+                }
+            };
+            fetchData();
+        }, []);
+
+
+    const handlesearchButton = () => {
     searchModal.open({
       title: "검색",
       content: <SearchFrame />,
@@ -40,7 +66,6 @@ const SideBar = ({ isOpen, onClose }) => {
   const handleCreatePostPage = () => {
     navigate("/create");
   };
-
   const handleBellButton = () => {
     bellModal.open({
       title: "알람",
@@ -49,10 +74,12 @@ const SideBar = ({ isOpen, onClose }) => {
     onClose();
   };
 
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/");
   };
+  
 
   return (
     <>
@@ -72,7 +99,7 @@ const SideBar = ({ isOpen, onClose }) => {
               <IconImg src={SearchIcon} />
               search
             </TextItem>
-
+            <TextItem>
             {bellModal.isOpen && (
               <Modal title={bellModal.title} content={bellModal.content} />
             )}
@@ -89,7 +116,7 @@ const SideBar = ({ isOpen, onClose }) => {
             </TextPlus>
           </TextList>
           <UserDate>
-            <UserProfile />
+            <UserProfile userId={userId} />
             <LogOut onClick={handleLogout}>로그아웃</LogOut>
           </UserDate>
         </List>
