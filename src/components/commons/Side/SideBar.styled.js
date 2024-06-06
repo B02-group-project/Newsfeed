@@ -37,12 +37,16 @@ export const TextItem = styled.button`
     display: flex;
     width: 90%;
     font-size: 20px;
-    margin: 20px 10px;
+    margin: 10px 10px;
+    padding: 10px 20px;
     background-color: transparent;
     border: none;
     color: inherit;
     cursor: pointer;
     outline: none;
+    &:hover {
+        background-color: #f0f0f0;
+    }
 `;
 
 export const TextPlus = styled.button`
@@ -73,4 +77,9 @@ export const UserDate = styled.div`
     margin-top: auto;
 `;
 
-export const LogOut = styled.label``;
+export const LogOut = styled.button`
+    margin: 40px;
+    border: transparent;
+    background-color: white;
+    font-size: 18px;
+`;

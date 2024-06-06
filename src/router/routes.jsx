@@ -1,12 +1,13 @@
-import { createBrowserRouter } from "react-router-dom";
-import LoginPage from "../pages/LoginPage";
-import MainPage from "../pages/MainPage";
-import MyPage from "../pages/MyPage";
-import SignUpPage from "../pages/SignUpPage/SignUpPage";
-import CreatePage from "../pages/CreatePage/CreatePage";
-import EditPage from "../pages/EditPage/EditPage";
+import { createBrowserRouter } from 'react-router-dom';
+import LoginPage from '../pages/LoginPage';
+import MainPage from '../pages/MainPage';
+import MyPage from '../pages/MyPage';
+import SignUpPage from '../pages/SignUpPage/SignUpPage';
+import CreatePage from '../pages/CreatePage/CreatePage';
+import EditPage from '../pages/EditPage/EditPage';
 
 const router = createBrowserRouter([
+
   {
     path: "/",
     element: <LoginPage />,
@@ -19,9 +20,9 @@ const router = createBrowserRouter([
     path: "/main",
     element: <MainPage />,
   },
+  
   {
-    // path: "/mypage/:userId",
-    path: "/mypage",
+    path: "/mypage/:userId",
     element: <MyPage />,
   },
   {
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
     path: "/edit/:postId",
     element: <EditPage />
   },
+
 ]);
 
 export default router;
