@@ -18,11 +18,11 @@
 
 ## 👥 팀원소개
 
-| 김민곤 | 김성준 | 김영 | 박성운 | 신자영 |
+| 김민곤 | 김성준 | 김영은 | 박성욱 | 신자영 |
 | :---: | :---: | :---: | :---: | :---: |
 | <img src="https://avatars.githubusercontent.com/MinKonKim" width="200"> | <img src="https://avatars.githubusercontent.com/ilovezerocokeya" width="200"> | <img src="https://avatars.githubusercontent.com/youngeun0407" width="200"> | <img src="https://avatars.githubusercontent.com/SecretCandy" width="200"> | <img src="https://avatars.githubusercontent.com/tpring" width="200"> |
 | 리더 | 부리더 | 팀원 | 팀원 | 팀원 |
-| [MinKonKim](https://github.com/MinKonKim) | [SecretCandy](https://github.com/SecretCandy) | [ilovezerocokeya](https://github.com/ilovezerocokeya) | [youngeun0407](https://github.com/youngeun0407)|  [tpring](https://github.com/tpring) |    
+| [MinKonKim](https://github.com/MinKonKim) | [ilovezerocokeya](https://github.com/ilovezerocokeya) | [youngeun0407](https://github.com/youngeun0407) | [SecretCandy](https://github.com/SecretCandy)|  [tpring](https://github.com/tpring) |    
 
 
 
