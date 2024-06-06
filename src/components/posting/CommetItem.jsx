@@ -41,7 +41,7 @@ const CommetItem = ({ commets, onDelete, userId }) => {
     return (
         <CommetItemWrapper>
             <UserInfo>
-                <UserProfile userId ={userId}
+                <UserProfile userId ={commets.user_id}
 />
                 <CommetDate>{commets.created_at}</CommetDate>
                 <ToggleMenu onClick={toggleMenu}>•••</ToggleMenu>
