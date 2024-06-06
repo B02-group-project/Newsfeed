@@ -26,7 +26,8 @@ const UserProfile = ({userId}) => {
 // console.log("유저프로필", userId);
   const handleClick = () => {
     if (userInfo) {
-      navigate(`/user/${userInfo.id}`);
+         navigate(`/mypage/${userInfo.id}`);
+
     }
   };
 
