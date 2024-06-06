@@ -15,6 +15,7 @@ import {
     IconImg,
     Label,
 } from './style/PostItem.styled';
+import UserProfile from '../commons/UserProfile';
 
 const PostItem = ({ post, likedPosts, onLikeChange, onDelete }) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -79,7 +80,7 @@ const PostItem = ({ post, likedPosts, onLikeChange, onDelete }) => {
     return (
         <PostItemWrapper>
             <UserInfo>
-                <div>유저 정보 id</div>
+                <UserProfile userId={userId}/>
                 <PostDate>{post.created_at}</PostDate>
                 <ToggleMenu onClick={toggleMenu}>•••</ToggleMenu>
                 {showMenu && (
