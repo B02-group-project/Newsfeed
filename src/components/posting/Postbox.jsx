@@ -21,7 +21,8 @@ const Postbox = () => {
                 console.log('error => ', error);
             } else {
                 console.log('data => ', data);
-                setPosts(data);
+                const sortedPosts = data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                setPosts(sortedPosts);
             }
         };
 
@@ -54,7 +55,7 @@ const Postbox = () => {
                             onLikeChange={handleLikeChange}
                             onDelete={handleDeletePost}
                         />
-                        <CommetComp postId={post.id} postUserId ={post.user_id} />
+                        <CommetComp postId={post.id} postUserId={post.user_id} />
                     </React.Fragment>
                 </PostboxWrapper>
             ))}

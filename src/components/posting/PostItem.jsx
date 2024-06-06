@@ -80,7 +80,7 @@ const PostItem = ({ post, likedPosts, onLikeChange, onDelete }) => {
     return (
         <PostItemWrapper>
             <UserInfo>
-                <UserProfile userId={post.user_id}/>
+                <UserProfile userId={post.user_id} />
                 <PostDate>{post.created_at}</PostDate>
                 <ToggleMenu onClick={toggleMenu}>•••</ToggleMenu>
                 {showMenu && (
@@ -92,7 +92,7 @@ const PostItem = ({ post, likedPosts, onLikeChange, onDelete }) => {
                 )}
             </UserInfo>
 
-            <PostImage />
+            <PostImage images={post.image_url} />
             <PostContent>{post.content}</PostContent>
             <LikeCheckbox type="checkbox" id={`likeCheckbox-${post.id}`} checked={liked} onChange={handleLikeChange} />
             <Label htmlFor={`likeCheckbox-${post.id}`}>
