@@ -1,4 +1,3 @@
-
 import { createBrowserRouter } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
 import MainPage from "../pages/MainPage";
@@ -8,10 +7,7 @@ import CreatePage from "../pages/CreatePage/CreatePage";
 import EditPage from "../pages/EditPage/EditPage";
 import ProfileEdit from "../pages/MyPage/ProfileEdit";
 
-
-
 const router = createBrowserRouter([
-
   {
     path: "/",
     element: <LoginPage />,
@@ -30,18 +26,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/create",
-    element: <CreatePage />
+    element: <CreatePage />,
   },
   {
-
     path: "/mypage/edit",
     element: <ProfileEdit />,
   },
   {
     path: "/edit/:postId",
-    element: <EditPage />
+    element: <EditPage />,
   },
-
 ]);
 
 export default router;

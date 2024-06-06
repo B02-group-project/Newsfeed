@@ -1,12 +1,12 @@
-import React from 'react';
 import styled from 'styled-components';
-import Header from './Header';
 import ProfilePhoto from './ProfilePhoto';
 import Navigation from './Navigation';
 import { useProfile } from '../../contexts/ProfileContext';
 
 const Profile = () => {
   const { profile } = useProfile();
+  
+
 
   // console.log("Profile in Profile component:", profile);
 
@@ -20,7 +20,6 @@ const Profile = () => {
 
   return (
     <ProfileContainer>
-      <Header />
       <NavigationAndPhotoContainer>
         <ProfilePhoto src={profile.photo || 'default_image_url'} />
         <Navigation postCount={postCount} followerCount={followerCount} followingCount={followingCount} />

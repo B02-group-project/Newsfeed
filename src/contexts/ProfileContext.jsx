@@ -7,6 +7,7 @@ export const useProfile = () => {
 };
 
 export const ProfileProvider = ({ children }) => {
+  const [userId, setUserId] = useState("5aff69c0-4c07-4c78-a4ea-0493c362c9eb");
   const [profile, setProfile] = useState({
     nickname: "기본 닉네임",
     bio: "기본 자기소개",
@@ -19,7 +20,7 @@ export const ProfileProvider = ({ children }) => {
   };
 
   return (
-    <ProfileContext.Provider value={{ profile, updateProfile }}>
+    <ProfileContext.Provider value={{ userId, setUserId, profile, updateProfile }}>
       {children}
     </ProfileContext.Provider>
   );
