@@ -1,20 +1,20 @@
-# 꺼내 먹어요 🍎
-B5조, 꺼내 먹어요 입니다!
+# 팀명
+팀명 이유!
 
 <br />
 
-# Eat TheMovie 🎥
-영화정보 오픈API인 TMDB(The Movie DB)를 사용하여 제작한 영화 검색 및 정보 제공 사이트 입니다.
+# 프로젝트명
+무슨 프로젝트인
 
 <br />
 
 ## 👥 팀원소개
 
-| 신혜훤 | 서주환 | 염경원 | 김형빈 | 신자영 |
+| 김민곤 | 김성준 | 김은영 | 박성운 | 신자영 |
 | :---: | :---: | :---: | :---: | :---: |
-| <img src="https://avatars.githubusercontent.com/shin1501020" width="200"> | <img src="https://avatars.githubusercontent.com/JoohwanSeo" width="200"> | <img src="https://avatars.githubusercontent.com/YCDM03" width="200"> | <img src="https://avatars.githubusercontent.com/hb9901" width="200"> | <img src="https://avatars.githubusercontent.com/tpring" width="200"> |
+| <img src="https://avatars.githubusercontent.com/[닉네님]" width="200"> | <img src="https://avatars.githubusercontent.com/[닉네님]" width="200"> | <img src="https://avatars.githubusercontent.com/[닉네님]" width="200"> | <img src="https://avatars.githubusercontent.com/[닉네님]" width="200"> | <img src="https://avatars.githubusercontent.com/tpring" width="200"> |
 | 리더 | 부리더 | 팀원 | 팀원 | 팀원 |
-| [shin1501020](https://github.com/shin1501020) | [JoohwanSeo](https://github.com/JoohwanSeo) | [YCDM03](https://github.com/YCDM03) | [hb9901](https://github.com/hb9901)|  [tpring](https://github.com/tpring) |    
+| [닉네님](깃주소) | [닉네님](깃주소) | [닉네님](깃주소) | [닉네님](깃주소)|  [tpring](https://github.com/tpring) |    
 
 
 
@@ -29,46 +29,48 @@ B5조, 꺼내 먹어요 입니다!
 
 ### 메인화면
  
-* 예고편 캐러셀 및 예고편 팝업창 기능
+* 기능구현
 
-  ![기능구현](https://github.com/B05-group-project/EatTheMovie/assets/104831702/cd06b01f-c83b-457d-8894-68e869cf1edb)
+  ![기능구현](gif)
 
-* 테마별 캐러셀 기능
+* 기능 구현
   
-  ![기능구현](https://github.com/B05-group-project/EatTheMovie/assets/144031936/01d20618-c0bd-49b2-9566-45d065e8833b)
+  ![기능구현](gif)
 
-### 상세 페이지
+### 마이페이지
 
-* 상세보기
+* 기능구현
 
-  <img width="600" alt="상세보기" src="https://github.com/B05-group-project/EatTheMovie/assets/72782380/7627618e-a72f-4ecd-8ff1-a719a2b5b3e7">
+  ![기능구현](gif)
 
-* 상세보기 - 뒤로가기 기능
-
-  ![상세보기-뒤로가기 기능](https://github.com/B05-group-project/EatTheMovie/assets/72782380/f1fa52de-b9b2-4111-9272-b464a5a3a941)
-
-* 댓글기능
- 
-  ![상세페이지 댓글](https://github.com/B05-group-project/EatTheMovie/assets/164147591/a798776d-228a-4954-a704-b6f96a855b0a)
-
-### 검색 결과 페이지
-
-* 언어선택
+* 기능 구현
   
-  ![언어선택](https://github.com/B05-group-project/EatTheMovie/assets/50387658/c941814e-2056-4c34-950e-bf6ed6a67a46)
+  ![기능구현](gif)
 
-* 상세페이지 이동
+### 게시글 C U 페이지
 
-  ![상세페이지 이동](https://github.com/B05-group-project/EatTheMovie/assets/50387658/f8046891-9d1f-46ca-909c-ea1b88fc04ab)
+* 기능구현
 
-* 무한 스크롤
+  ![기능구현](gif)
+
+* 기능 구현
   
-  ![무한스크롤](https://github.com/B05-group-project/EatTheMovie/assets/50387658/2cfd80cd-0131-4207-98ab-d3d216e6dbc5)
+  ![기능구현](gif)
+
+### 댓글
+
+* 기능구현
+
+  ![기능구현](gif)
+
+* 기능 구현
+  
+  ![기능구현](gif)
 
 <br />
 
 ## 🔗 링크
-### [✨ NOTION](https://teamsparta.notion.site/B-05-1cddea8d779149269e215f7d715abe46)
-### [✨ FIGMA](https://www.figma.com/file/hYZbrWyf0l9aXULKD0AJIx?embed_host=notion&kind=file&mode=design&node-id=0-1&t=ri8AzOkHKC5KwFMk-0&type=design&viewer=1)
+### [✨ NOTION](https://www.notion.so/teamsparta/B02-fde9acc6645e4d6f80b6d95dbf10aab0))
+### [✨ FIGMA](https://www.figma.com/design/T4mByqcFcX44p0qngHpyEA/BlackBerry?node-id=0-1&t=Z0HqqGEn74kjblBw-0)
 
 <br />
