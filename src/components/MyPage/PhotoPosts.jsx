@@ -20,10 +20,10 @@ export default PhotoPosts
 
 // 전체 포스트를 포함하는 컨테이너 스타일
 const PostsGrid = styled.div`
-  display: grid;
+ display: grid;
   grid-template-columns: repeat(3, 1fr); 
-  gap: 10px;
-  padding: 50px;
+  gap: 20px; /* 사진 간격을 조정 */
+  padding: 0 20%; /* 좌우 패딩 추가 */
 `;
 
 // 개별 포스트 컨테이너 스타일
@@ -36,7 +36,7 @@ const PostContainer = styled.div`
 
 // 이미지 스타일
 const Image = styled.img`
-  max-width: 100%;
+  max-width: 70%;
   height: auto;
   margin-bottom: 10px;
 `;

@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types'; // PropTypes 임포트 추가
+import { useNavigate } from 'react-router-dom';
 import { useProfile } from '../../contexts/ProfileContext';
 
+// HeaderContainer는 Navigation 안에 있지만 Header를 따로 빼내었습니다.
+const HeaderContainer = styled.header`
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  padding: 20px;
+`;
+
+// Navigation 컴포넌트
 const Navigation = ({ initialPostCount, initialFollowerCount, initialFollowingCount }) => {
   const { profile } = useProfile();
   const [postCount, setPostCount] = useState(initialPostCount || 0);
   const [followerCount, setFollowerCount] = useState(initialFollowerCount || 0);
   const [followingCount, setFollowingCount] = useState(initialFollowingCount || 0);
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   useEffect(() => {
     if (profile) {
@@ -16,6 +27,11 @@ const Navigation = ({ initialPostCount, initialFollowerCount, initialFollowingCo
       setFollowingCount(profile.following ? profile.following.length : 0);
     }
   }, [profile]);
+
+  // Header 컴포넌트 내부에서 사용할 handleEditProfile 함수
+  const handleEditProfile = () => {
+    navigate('/mypage/edit');
+  };
 
   if (!profile) {
     return <div>로딩 중...</div>;
@@ -31,6 +47,10 @@ const Navigation = ({ initialPostCount, initialFollowerCount, initialFollowingCo
             <StyledNavItem>팔로우 {followingCount}</StyledNavItem>
           </StyledNavList>
         </nav>
+        {/* HeaderContainer 내부에 프로필 편집 버튼 */}
+        <HeaderContainer>
+          <button onClick={handleEditProfile}>프로필 편집</button>
+        </HeaderContainer>
         <StyledTextContainer>
           <h2>{profile.nickname}</h2>
           <p>{profile.bio}</p>
@@ -38,7 +58,7 @@ const Navigation = ({ initialPostCount, initialFollowerCount, initialFollowingCo
       </CombinedComponent>
     </Container>
   );
-}
+};
 
 Navigation.propTypes = {
   initialPostCount: PropTypes.number,
@@ -48,7 +68,7 @@ Navigation.propTypes = {
 
 export default Navigation;
 
-
+// 스타일 컴포넌트들
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -66,19 +86,19 @@ const CombinedComponent = styled.div`
 `;
 
 const StyledTextContainer = styled.div`
-  text-align: left;
+  text-align: center;
   font-weight: bold;
-  font-size: 15px;
-  width: 100%;
+  font-size: 18px;
 `;
 
 const StyledNavList = styled.ul`
   display: flex;
-  justify-content: left;
+  justify-content: center;
   list-style: none;
 `;
 
 const StyledNavItem = styled.li`
   margin: 0 25px;
   font-weight: bold;
+  min-width: 120px; /* 각 항목의 최소 너비 설정 */
 `;

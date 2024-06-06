@@ -7,10 +7,11 @@ const ProfileEdit = () => {
   const { profile, updateProfile } = useProfile();
   const [newProfile, setNewProfile] = useState({ nickname: '', bio: '', photo: '' });
   const [newPhoto, setNewPhoto] = useState(null);
-  const { userId } = useParams(); // userId를 가져옵니다.
+  const { userId } = useParams(); // useParams를 통해 userId를 가져옴
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log("userId from useParams:", userId); // userId를 로그로 출력
     if (profile) {
       setNewProfile({
         nickname: profile.nickname || '',
@@ -18,7 +19,7 @@ const ProfileEdit = () => {
         photo: profile.photo || ''
       });
     }
-  }, [profile]);
+  }, [profile, userId]); // userId를 의존성 배열에 추가
 
   useEffect(() => {
     return () => {
@@ -27,6 +28,12 @@ const ProfileEdit = () => {
       }
     };
   }, [newPhoto]);
+
+  // URL 변경 감지하여 해당 유저의 프로필 데이터를 가져와 화면 업데이트
+  useEffect(() => {
+    // 해당 userId에 맞는 프로필 데이터를 가져오는 로직 작성
+    // 예: fetchProfile(userId).then((data) => setNewProfile(data));
+  }, [userId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,29 +55,31 @@ const ProfileEdit = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Submitting new profile:", newProfile);
     if (newPhoto) {
       const reader = new FileReader();
-      reader.onloadend = () => {
+      reader.onloadend = async () => {
         const base64data = reader.result;
-        updateProfile({ ...newProfile, photo: base64data });
+        await updateProfile({ ...newProfile, photo: base64data });
         alert('Profile updated!');
-        navigate(`/mypage/${userId}`);
+        console.log("Navigating to /mypage/" + userId);
+        navigate(`/MyPage/${userId}`); // 템플릿 문자열 사용하여 userId 삽입
       };
       reader.readAsDataURL(newPhoto);
     } else {
-      updateProfile(newProfile);
+      await updateProfile(newProfile);
       alert('Profile updated!');
-      navigate(`/mypage/${userId}`);
+      console.log("Navigating to /mypage/" + userId);
+      navigate(`/MyPage/${userId}`); // 템플릿 문자열 사용하여 userId 삽입
     }
   };
 
   return (
     <Container>
       <h1>Edit Profile</h1>
-       <ProfileImage src={newProfile.photo || profile.photo} alt="Profile" />
+      <ProfileImage src={newProfile.photo || profile.photo} alt="Profile" />
       <Form onSubmit={handleSubmit}>
         <input type="file" onChange={handlePhotoChange} accept="image/*" />
         <Input
