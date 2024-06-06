@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 // 헤더 스타일
 const HeaderContainer = styled.header`
@@ -15,10 +16,15 @@ const Title = styled.h1`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleEditProfile = () => {
+    navigate('/mypage/edit');
+  };
   return (
     <HeaderContainer>
       <Title>UserAccount</Title>
-      <button>프로필 편집</button>
+      <button onClick={handleEditProfile}>프로필 편집</button>
     </HeaderContainer>
   );
 }

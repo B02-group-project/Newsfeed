@@ -10,7 +10,7 @@ const Button = ({ text, handleClick, width, height, fontSize }) => {
 
 };
 
-export default React.memo(Button);
+export default Button;
 
 export const Btn = styled.button`
 

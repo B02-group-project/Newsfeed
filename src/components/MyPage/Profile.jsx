@@ -1,34 +1,46 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from './Header';
-import Navigation from './Navigation';
 import ProfilePhoto from './ProfilePhoto';
+import Navigation from './Navigation';
+import { useProfile } from '../../contexts/ProfileContext';
+
+const Profile = () => {
+  const { profile } = useProfile();
+
+  // console.log("Profile in Profile component:", profile);
+
+  if (!profile) {
+    return <div>로딩 중...</div>;
+  }
+
+  const postCount = profile.posts ? profile.posts.length : 0;
+  const followerCount = profile.followers ? profile.followers.length : 0;
+  const followingCount = profile.following ? profile.following.length : 0;
+
+  return (
+    <ProfileContainer>
+      <Header />
+      <NavigationAndPhotoContainer>
+        <ProfilePhoto src={profile.photo || 'default_image_url'} />
+        <Navigation postCount={postCount} followerCount={followerCount} followingCount={followingCount} />
+      </NavigationAndPhotoContainer>
+    </ProfileContainer>
+  );
+};
+
+export default Profile;
+
 
 // 스타일링된 컨테이너 생성
 const ProfileContainer = styled.div`
-  display: flex; // flexbox 레이아웃 사용
-  flex-direction: column; // 세로 방향으로 아이템 배치
+  display: flex;
+  flex-direction: column;
 `;
 
 const NavigationAndPhotoContainer = styled.div`
- display: flex; // 가로 방향으로 아이템 배치
-  align-items: center; // 아이템들을 세로 중앙에 위치시킴
+  display: flex; 
+  align-items: center;
   justify-content: center;
-  margin-right: 33vh; // 상단에 여백 추가 (페이지 높이의 20%)
+  margin-right: 20%;
 `;
-
-const Profile = () => {
-    const profileImageUrl = 'https://example.com/path/to/profile-image.jpg'; // 실제 프로필 이미지 URL로 변경
-
-    return (
-        <ProfileContainer>
-            <Header />
-            <NavigationAndPhotoContainer>
-                <ProfilePhoto src={profileImageUrl} />
-                <Navigation />
-            </NavigationAndPhotoContainer>
-        </ProfileContainer>
-    );
-}
-
-export default Profile;
