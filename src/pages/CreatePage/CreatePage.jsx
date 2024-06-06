@@ -10,7 +10,8 @@ import {
     RemoveButton,
     PostContent,
     SubmitButton,
-    ButtonContainer
+    ButtonContainer,
+    MainButton // MainButton 스타일 추가
 } from './CreatePage.styled';
 
 // 이미지의 공개 URL을 가져오는 함수
@@ -18,7 +19,6 @@ const getAvatarPublicUrl = (imagePath) => {
     const { data } = supabase.storage
         .from("posts")
         .getPublicUrl(String(imagePath));
-    console.log(data);
     return data.publicUrl;
 };
 
@@ -143,6 +143,7 @@ const CreatePage = () => {
 
     return (
         <Form onSubmit={handleSubmit}>
+            <MainButton onClick={() => navigate('/main')}>Main</MainButton> 
             <ImageUpload
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
