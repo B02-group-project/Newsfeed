@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { useProfile } from "../../contexts/ProfileContext";
 
@@ -7,6 +7,7 @@ const ProfileEdit = () => {
   const { profile, updateProfile } = useProfile();
   const [newProfile, setNewProfile] = useState({ nickname: '', bio: '', photo: '' });
   const [newPhoto, setNewPhoto] = useState(null);
+  const { userId } = useParams(); // userId를 가져옵니다.
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,13 +57,13 @@ const ProfileEdit = () => {
         const base64data = reader.result;
         updateProfile({ ...newProfile, photo: base64data });
         alert('Profile updated!');
-        navigate('/mypage');
+        navigate(`/mypage/${userId}`);
       };
       reader.readAsDataURL(newPhoto);
     } else {
       updateProfile(newProfile);
       alert('Profile updated!');
-      navigate('/mypage');
+      navigate(`/mypage/${userId}`);
     }
   };
 

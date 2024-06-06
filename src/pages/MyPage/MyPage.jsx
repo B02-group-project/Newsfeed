@@ -12,7 +12,7 @@ const MyPage = () => {
   const { profile, updateProfile } = useProfile();
   const [activeTab, setActiveTab] = useState("photo");
   const [userData, setUserData] = useState(null);
-  const [postsData, setPostsDat] = useState([]);
+  const [postsData, setPostsData] = useState([]);
   
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const MyPage = () => {
         if (error) {
           console.log('Error fetching post data:', error.message);
         } else {
-          setPostsDat(data);
+          setPostsData(data);
         }
       } catch (e) {
         console.log('Error fetching post data:', e.message);
@@ -78,13 +78,6 @@ const MyPage = () => {
     setActiveTab(tab);
   };
 
-  
-
-  const textPosts = [
-    { title: '글 제목 1', excerpt: '글 요약 1' },
-    { title: '글 제목 2', excerpt: '글 요약 2' },
-    { title: '글 제목 3', excerpt: '글 요약 3' },
-  ];
 
 
   return (
@@ -100,7 +93,7 @@ const MyPage = () => {
       </TabButtons>
       <TabContent>
         {activeTab === 'photo' && <PhotoPosts posts={postsData} />}
-        {activeTab === 'text' && <TextPosts posts={textPosts} />}
+        {activeTab === 'text' && <TextPosts posts={postsData} />}
       </TabContent>
     </div>
   );
