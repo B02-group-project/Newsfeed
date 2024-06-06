@@ -1,3 +1,4 @@
+
 import Header from '../../components/commons/Header/Header';
 import Postbox from '../../components/posting/Postbox';
 import { MainWrapper } from './MainPage.styled';

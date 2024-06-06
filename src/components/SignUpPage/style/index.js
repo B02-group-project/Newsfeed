@@ -49,6 +49,19 @@ export const Input = styled.input`
     outline: none;
   }
 `;
+export const ImageInput = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 10px;
+  border-radius: 50%;
+  border: 2px solid #000;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  cursor: pointer;
+`;
 
 export const LoginData = styled.form`
   display: flex;

@@ -1,4 +1,6 @@
+
 import { useEffect, useState } from "react";
+
 import { useNavigate } from 'react-router-dom';
 import Log from '../Log';
 import HomeIcon from '../../../assets/Icons/home_icon.png';
@@ -20,6 +22,10 @@ import {
     LogOut,
 } from './SideBar.styled';
 import UserProfile from '../UserProfile';
+import { useModal } from '../../../contexts/modal.context';
+import SearchFrame from './SearchFrame';
+import BellFrame from './BellFrame';
+import Modal from '../Modal/Modal'; 
 
 
 const SideBar = () => {
@@ -80,7 +86,9 @@ const SideBar = () => {
                 </UserDate>
             </List>
         </SideBarWrapper>
+
     );
+
 };
 
 export default SideBar;

@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import useInput from "../../hooks/useInput";
 import { updatePersonalInfo } from "../../redux/slice/userSlice";
 import Button from "../commons/Button";
-import { Header, Input, UserData } from "./style";
+import { Input, UserData } from "./style";
 
 const PersonalInfoForm = ({ handleClick }) => {
   const [name, setName] = useInput("");
@@ -18,7 +18,6 @@ const PersonalInfoForm = ({ handleClick }) => {
   };
   return (
     <UserData onSubmit={handleSubmit}>
-      <Header>사용자 정보</Header>
       <Input type="text" value={name} onChange={setName} placeholder="이름" />
       <Input
         type="text"

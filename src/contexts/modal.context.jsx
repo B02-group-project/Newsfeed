@@ -9,7 +9,7 @@ const ModalContext = createContext(initialState);
 //커스텀 훅
 export const useModal = () => useContext(ModalContext);
 
-export function ModalProvier({ children }) {
+export function ModalProvider({ children }) {
   const [modalElement, setModalElement] = useState(null);
 
   const value = {

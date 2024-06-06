@@ -13,6 +13,9 @@ export const ImageUpload = styled.div`
   margin: 40px auto 20px auto;
   position: relative;
   background-color: lightgray;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
 `;
 
 export const UploadInstructions = styled.div`
@@ -28,6 +31,8 @@ export const FileInputLabel = styled.label`
   padding: 5px;
   border-radius: 5px;
   background-color: #0095f6;
+  display: inline-block;
+  margin-top: 10px;
 `;
 
 export const ImagePreview = styled.div`
@@ -68,9 +73,14 @@ export const PostContent = styled.textarea`
   font-size: 16px;
 `;
 
-export const SubmitButton = styled.button`
-  width: 20%;
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px;
   margin: 10px auto 30px auto;
+`;
+
+export const SubmitButton = styled.button`
   padding: 10px;
   border: none;
   border-radius: 10px;
@@ -80,5 +90,18 @@ export const SubmitButton = styled.button`
   cursor: pointer;
   &:hover {
     background-color: #007bbf;
+  }
+`;
+
+export const DeleteButton = styled.button`
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #dc3545;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  &:hover {
+    background-color: #c82333;
   }
 `;

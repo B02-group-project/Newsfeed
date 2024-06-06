@@ -1,30 +1,26 @@
-import supabase from "./supabase.api";
+import supabase from "./supabase.client";
 
-//이미지 업로드
-export const uploadImage = async (file) => {
+//사용자가 선택한 아바타 이미지를 Storage에 업로드하는 함수.
+export const uploadImage = async ({ e, bucket }) => {
+  if (!e.target.files || e.target.files.length === 0) {
+    throw new Error("이미지를 선택해주세요.");
+  }
+  const file = e.target.files[0];
+  //이미지 업로드 실행
   const { data, error } = await supabase.storage
-    .from("images")
-    .upload(`public/${file.name}`, file);
+    .from(bucket)
+    .upload(`${file.name}`, file);
 
   if (error) {
-    console.error("Error uploading image:", error);
-    return null;
+    console.error(`[${bucket}]이미지 업로드과정에 에러`, error);
   }
-
-  console.log("Image uploaded:", data);
-  return data;
+  return data.path;
 };
 
-// 이미지 URL 가져오기 - 업로드한 이미지 내려받기
-export const getImageUrl = (path) => {
-  const { publicURL, error } = supabase.storage
-    .from("images")
-    .getPublicUrl(path);
-
-  if (error) {
-    console.error("Error getting image URL:", error);
-    return null;
-  }
-
-  return publicURL;
+export const getAvatarPublicUrl = (imagePath) => {
+  const { data } = supabase.storage
+    .from("avatars")
+    .getPublicUrl(String(imagePath));
+  console.log(data);
+  return data.publicUrl;
 };
