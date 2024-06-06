@@ -1,38 +1,30 @@
-import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import useInput from "../../hooks/useInput";
-import { updateNicknameAvatar } from "../../redux/slice/userSlice";
+import { updateNicknameDesc } from "../../redux/slice/userSlice";
+import { isValidNickname } from "../../utils/validator";
 import Button from "../commons/Button";
-import { AvatarData, Header, Input } from "./style";
+import UserProfileImage from "../commons/UserProfileImage";
+import { AvatarData, Input } from "./style";
 
 const NicknameAvatarForm = ({ handleClick }) => {
-  const [avatarUrl, setAvatarUrl] = useInput("");
-  const [nickname, setNickname] = useInput("");
+  const [nickname, setNickname] = useInput("@");
   const [desc, setDesc] = useInput("");
 
   const dispatch = useDispatch();
 
-  const onDrop = useCallback((acceptedFiles) => {
-    const file = acceptedFiles[0];
-    setAvatarUrl(URL.createObjectURL(file));
-  }, []);
-
-  const { getRootPros, getInputProps } = useDropzone;
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (isValidNickname(nickname)) {
+      alert("닉네임 형식이 올바르지 않습니다.");
+      return;
+    }
     handleClick();
-    dispatch(updateNicknameAvatar({ avatarUrl, nickname, desc }));
+    dispatch(updateNicknameDesc({ nickname, desc }));
   };
+
   return (
     <AvatarData onSubmit={handleSubmit}>
-      <Header>추가 내용</Header>
-      <Input
-        type="text"
-        value={avatarUrl}
-        onChange={setAvatarUrl}
-        placeholder="이미지"
-      />
+      <UserProfileImage />
       <Input
         type="text"
         value={nickname}

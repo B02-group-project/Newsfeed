@@ -17,6 +17,7 @@ async function signUp(userdata) {
     birthday: userdata.birthday,
     avatar_url: userdata.avatar_url,
     desc: userdata.desc,
+    email: userdata.email,
   });
 
   if (insertError) {

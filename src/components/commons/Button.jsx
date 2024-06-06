@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const Button = ({ text, handleClick, width, height, fontSize }) => {
@@ -13,7 +14,7 @@ const Button = ({ text, handleClick, width, height, fontSize }) => {
   );
 };
 
-export default Button;
+export default React.memo(Button);
 
 export const Btn = styled.button`
   background-color: #136dc1;
