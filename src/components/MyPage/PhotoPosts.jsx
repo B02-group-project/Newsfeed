@@ -6,17 +6,18 @@ import MyPostbox from '../posting/MyPostbox';
 const PhotoPosts = ({ posts }) => {
     const PostModal = useModal();
 
-    const handlePostButton = () => {
+    const handlePostButton = (postId) => {
+        console.log('Opening post modal for post with ID:', postId);
         PostModal.open({
             title: '게시글',
-            content: <MyPostbox postId={posts.id} />,
+            content: <MyPostbox myPostId={postId} />, // Pass postId and userId
         });
     };
 
     return (
         <PostsGrid>
             {posts.map((post, index) => (
-                <PostContainer key={index} onClick={() => handlePostButton(post.id)}>
+                <PostContainer key={index} onClick={() => handlePostButton(post.id, post.user_id)}>
                     <Image src={post.image_url} />
                     <Description>{post.content}</Description>
                 </PostContainer>
@@ -28,7 +29,7 @@ const PhotoPosts = ({ posts }) => {
 export default PhotoPosts;
 
 // 전체 포스트를 포함하는 컨테이너 스타일
-const PostsGrid = styled.div`
+export const PostsGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px; /* 사진 간격을 조정 */
@@ -36,7 +37,7 @@ const PostsGrid = styled.div`
 `;
 
 // 개별 포스트 컨테이너 스타일
-const PostContainer = styled.div`
+export const PostContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,13 +46,13 @@ const PostContainer = styled.div`
 `;
 
 // 이미지 스타일
-const Image = styled.img`
+export const Image = styled.img`
     max-width: 70%;
     height: auto;
     margin-bottom: 10px;
 `;
 
 // 설명(Description) 스타일
-const Description = styled.p`
+export const Description = styled.p`
     color: #333;
 `;

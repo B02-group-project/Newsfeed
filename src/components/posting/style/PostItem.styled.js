@@ -28,7 +28,7 @@ export const PostDate = styled.div`
 export const ToggleMenu = styled.div`
     cursor: pointer;
     padding: 5px;
-    font-size: 1.5em;
+    font-size: 20px;
 `;
 
 export const DropdownMenu = styled.ul`

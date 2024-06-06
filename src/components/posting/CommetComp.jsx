@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CommetCompWrapper, InputWrapper, CommentInput, SubmitButton } from './style/CommetComp.styled';
+import { CommetCompWrapper, CommentList, InputWrapper, CommentInput, SubmitButton } from './style/CommetComp.styled';
 import CommetItem from './CommetItem';
 import supabase from '../../api/supabase.client';
 
@@ -72,11 +72,11 @@ const CommetComp = ({ postId }) => {
 
     return (
         <CommetCompWrapper>
-            <div>
+            <CommentList>
                 {commets.map((commet) => (
                     <CommetItem key={commet.id} commets={commet} onDelete={handDeleteCommet} userId={userId} />
                 ))}
-            </div>
+            </CommentList>
             <InputWrapper>
                 <CommentInput
                     type="text"

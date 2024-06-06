@@ -9,10 +9,14 @@ export const CommetCompWrapper = styled.div`
     padding-bottom: 20px;
 `;
 
-export const Commetlist = styled.div`
+export const CommentList = styled.div`
     padding: 10px;
-    max-height: 300px;
+    max-height: 330px;
     overflow-y: auto;
+    ::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Edge */
+    }
+    scrollbar-width: none; /* Firefox */
 `;
 
 export const InputWrapper = styled.div`
