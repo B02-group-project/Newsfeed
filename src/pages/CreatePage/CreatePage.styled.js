@@ -36,6 +36,16 @@ export const FileInputLabel = styled.label`
     margin-top: 10px;
 `;
 
+export const ImagePreviewWrapper = styled.div`
+  position: relative;
+  display: inline-block;
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+`;
+
 export const ImagePreview = styled.img`
     position: relative;
     max-width: 100%;

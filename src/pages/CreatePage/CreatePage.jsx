@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import supabase from '../../api/supabase.client';
 import {
     Form,
     ImageUpload,
     UploadInstructions,
     FileInputLabel,
-    ImagePreview,
+    ImagePreviewWrapper, // ImagePreview 대신 ImagePreviewWrapper로 변경
     RemoveButton,
     PostContent,
     SubmitButton,
@@ -13,11 +14,26 @@ import {
 } from './CreatePage.styled';
 
 const CreatePage = () => {
-    const [image, setImage] = useState(null); // 사용자가 업로드한 이미지 파일 저장
-    const [preview, setPreview] = useState(null); // 이미지 파일의 미리보기를 저장
-    const [content, setContent] = useState(''); // 게시물의 내용을 저장
+    const [image, setImage] = useState(null);
+    const [preview, setPreview] = useState(null);
+    const [content, setContent] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const { data: { user }, error } = await supabase.auth.getUser();
+            if (error) {
+                console.error('Error fetching user:', error);
+            } else {
+                setUser(user);
+            }
+        };
+
+        fetchUser();
+    }, []);
 
     const handleSelect = (e) => {
         const file = e.target.files[0];
@@ -25,7 +41,7 @@ const CreatePage = () => {
             setImage(file);
             setPreview(URL.createObjectURL(file));
         }
-    }; // 선택한 파일을 상태에 저장하고 미리보기를 생성
+    };
 
     const handleDrop = (e) => {
         e.preventDefault();
@@ -34,11 +50,11 @@ const CreatePage = () => {
             setImage(file);
             setPreview(URL.createObjectURL(file));
         }
-    }; // 드롭된 파일을 상태에 저장하고 미리보기를 생성
+    };
 
     const handleDragOver = (e) => {
         e.preventDefault();
-    }; // 드래그 앤 드롭 이벤트가 발생할 때 기본 동작 방지
+    };
 
     const handleRemoveImage = () => {
         setImage(null);
@@ -49,30 +65,39 @@ const CreatePage = () => {
         e.preventDefault();
         setLoading(true);
         setError(null);
-        // 여기에 게시물 생성 로직 추가
-        let imageUrl = null;    
+
+        if (!user) {
+            setError('사용자 정보를 가져오지 못했습니다.');
+            setLoading(false);
+            return;
+        }
+
+        let imageUrl = null;
+
         if (image) {
-            const { data, error } = await supabase
+            const { error: imageError } = await supabase
                 .storage
                 .from('images')
                 .upload(`public/${image.name}`, image);
 
-            if (error) {
-                console.error(error);
+            if (imageError) {
+                console.error(imageError);
                 setError('이미지 업로드 중 오류가 발생했습니다.');
                 setLoading(false);
                 return;
             }
 
-            imageUrl = data.path;
+            imageUrl = `public/${image.name}`;
         }
 
-        const { error } = await supabase
+        const { data, error: postError } = await supabase
             .from('posts')
-            .insert({ content, created_at: new Date() });
+            .insert({ content, created_at: new Date(), user_id: user.id, image_url: imageUrl })
+            .select()
+            .single();
 
-        if (error) {
-            console.log(error);
+        if (postError) {
+            console.error(postError);
             setError('게시물 작성 중 오류가 발생했습니다.');
             setLoading(false);
             return;
@@ -83,7 +108,9 @@ const CreatePage = () => {
         setPreview(null);
         setContent('');
         setLoading(false);
-    }; // 사용자가 폼을 제출할 때 호출됨. 여기서 게시물 생성 로직을 추가할 수 있음.
+
+        navigate(`/edit/${data.id}`);
+    };
 
     return (
         <Form onSubmit={handleSubmit}>
@@ -92,10 +119,10 @@ const CreatePage = () => {
                 onDragOver={handleDragOver}
             >
                 {preview ? (
-                    <ImagePreview>
-                        <img src={preview} alt="Preview" />
-                        <RemoveButton onClick={handleRemoveImage}>×</RemoveButton>
-                    </ImagePreview>
+                    <ImagePreviewWrapper>
+                        <img src={preview} alt="미리보기" />
+                        <RemoveButton onClick={handleRemoveImage}>&times;</RemoveButton>
+                    </ImagePreviewWrapper>
                 ) : (
                     <UploadInstructions>
                         <p>사진과 동영상을 여기에 끌어다 놓으세요</p>

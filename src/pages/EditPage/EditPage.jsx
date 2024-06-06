@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import supabase from '../../api/supabase.client';
 import {
     Form,
@@ -9,21 +10,32 @@ import {
     RemoveButton,
     PostContent,
     SubmitButton,
-    DeleteButton,
     ButtonContainer
 } from './EditPage.styled';
 
-const EditPage = ({ postId, onDelete }) => {
+const EditPage = () => {
+    const { postId } = useParams();
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState(null);
     const [content, setContent] = useState('');
+    const [user, setUser] = useState(null); // 사용자 정보 저장
 
     useEffect(() => {
-        // 여기에 기존 게시물 데이터를 가져오는 로직추가 (supabase 공식 문서)
+        const fetchUser = async () => {
+            const { data: { user }, error } = await supabase.auth.getUser();
+            if (error) {
+                console.error('Error fetching user:', error);
+            } else {
+                setUser(user);
+            }
+        };
+
+        fetchUser();
+
         const fetchPost = async () => {
             const { data, error } = await supabase
                 .from('posts')
-                .select('content, image_url')
+                .select('content')
                 .eq('id', postId)
                 .single();
 
@@ -33,7 +45,6 @@ const EditPage = ({ postId, onDelete }) => {
             }
 
             setContent(data.content);
-            setPreview(data.image_url);
         };
 
         fetchPost();
@@ -67,16 +78,22 @@ const EditPage = ({ postId, onDelete }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // 여기에 게시물 수정 로직 추가
-        let imageUrl = preview;
+
+        if (!user) {
+            alert('사용자 정보를 가져오지 못했습니다.');
+            return;
+        }
+
+        let imageUrl = null;
+
         if (image) {
-            const { data, error } = await supabase
+            const { data, error: imageError } = await supabase
                 .storage
                 .from('images')
                 .upload(`public/${image.name}`, image);
 
-            if (error) {
-                console.error(error);
+            if (imageError) {
+                console.log(imageError);
                 alert('이미지 업로드 중 오류가 발생했습니다.');
                 return;
             }
@@ -84,34 +101,28 @@ const EditPage = ({ postId, onDelete }) => {
             imageUrl = data.path;
         }
 
-        const { error } = await supabase
+        console.log('Updating post with content:', content);
+        console.log('Image URL:', imageUrl);
+
+        const updates = {
+            content,
+            updated_at: new Date(),
+            user_id: user.id,
+            ...(imageUrl && { image_url: imageUrl }) // imageUrl이 있을 경우에만 포함
+        };
+
+        const { error: postError } = await supabase
             .from('posts')
-            .update({ content, updated_at: new Date() })
+            .update(updates)
             .eq('id', postId);
 
-        if (error) {
-            console.error(error);
+        if (postError) {
+            console.error(postError);
             alert('게시물 수정 중 오류가 발생했습니다.');
             return;
         }
 
         alert('게시물이 수정되었습니다.');
-    };
-
-    const handleDelete = async () => {
-        const { error } = await supabase
-            .from('posts')
-            .delete()
-            .eq('id', postId);
-
-        if (error) {
-            console.error(error);
-            alert('게시물 삭제 중 오류가 발생했습니다.');
-            return;
-        }
-
-        onDelete(postId);
-        alert('게시물이 삭제되었습니다.');
     };
 
     return (
@@ -122,7 +133,7 @@ const EditPage = ({ postId, onDelete }) => {
             >
                 {preview ? (
                     <ImagePreview>
-                        <img src={preview} alt="Preview" />
+                        <img src={preview} alt="미리보기" />
                         <RemoveButton onClick={handleRemoveImage}>×</RemoveButton>
                     </ImagePreview>
                 ) : (
@@ -148,7 +159,6 @@ const EditPage = ({ postId, onDelete }) => {
             />
             <ButtonContainer>
                 <SubmitButton type="submit">수정하기</SubmitButton>
-                <DeleteButton type="button" onClick={handleDelete}>삭제하기</DeleteButton>
             </ButtonContainer>
         </Form>
     );
