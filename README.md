@@ -1,20 +1,28 @@
+
+![Blackberry_Log](https://github.com/B02-group-project/Newsfeed/assets/57051139/e49d92a7-9027-4008-aa3d-57a0a137895f)
+
 # 팀명
 팀명 이유!
-
+"코드 블랙베리 2조"라는 팀명에서는
+"코드"가 프로그래밍이나 소프트웨어와 관련된 작업을 의미하고,
+"블랙베리"는 팀이 빠르고 효율적으로 일하는 것을 상징합니다. 또한,
+"2조"는 해당 팀이 2조에 속한다는 것을 강조합니다.
+따라서 이 팀명은 빠르고 효율적인 코드 작성을 강조하는 것으로 해석될 수 있습니다.
 <br />
 
 # 프로젝트명
-무슨 프로젝트인
+무슨 프로젝트인가요?
+블랙베리 
 
 <br />
 
 ## 👥 팀원소개
 
-| 김민곤 | 김성준 | 김은영 | 박성운 | 신자영 |
+| 김민곤 | 김성준 | 김영 | 박성운 | 신자영 |
 | :---: | :---: | :---: | :---: | :---: |
-| <img src="https://avatars.githubusercontent.com/[닉네님]" width="200"> | <img src="https://avatars.githubusercontent.com/[닉네님]" width="200"> | <img src="https://avatars.githubusercontent.com/[닉네님]" width="200"> | <img src="https://avatars.githubusercontent.com/[닉네님]" width="200"> | <img src="https://avatars.githubusercontent.com/tpring" width="200"> |
+| <img src="https://avatars.githubusercontent.com/MinKonKim" width="200"> | <img src="https://avatars.githubusercontent.com/ilovezerocokeya" width="200"> | <img src="https://avatars.githubusercontent.com/youngeun0407" width="200"> | <img src="https://avatars.githubusercontent.com/SecretCandy" width="200"> | <img src="https://avatars.githubusercontent.com/tpring" width="200"> |
 | 리더 | 부리더 | 팀원 | 팀원 | 팀원 |
-| [닉네님](깃주소) | [닉네님](깃주소) | [닉네님](깃주소) | [닉네님](깃주소)|  [tpring](https://github.com/tpring) |    
+| [MinKonKim](https://github.com/MinKonKim) | [SecretCandy](https://github.com/SecretCandy) | [ilovezerocokeya](https://github.com/ilovezerocokeya) | [youngeun0407](https://github.com/youngeun0407)|  [tpring](https://github.com/tpring) |    
 
 
 
