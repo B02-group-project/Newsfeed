@@ -80,7 +80,7 @@ const PostItem = ({ post, likedPosts, onLikeChange, onDelete }) => {
     return (
         <PostItemWrapper>
             <UserInfo>
-                <UserProfile userId={userId}/>
+                <UserProfile userId={post.user_id}/>
                 <PostDate>{post.created_at}</PostDate>
                 <ToggleMenu onClick={toggleMenu}>•••</ToggleMenu>
                 {showMenu && (

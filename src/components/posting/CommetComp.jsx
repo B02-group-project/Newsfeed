@@ -56,9 +56,9 @@ const CommetComp = ({ postId }) => {
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    // 제목과 내용이 비어있으면 경고 메시지 표시
+    // 댓글이 비어있으면 경고 메시지 표시
     if (!addCommet) {
-        alert('제목과 내용 모두 입력해주세요.');
+        alert('댓글을 입력해주세요.');
         return;}
     const { data, error } = await supabase.from("commets").insert({
       post_id: postId,

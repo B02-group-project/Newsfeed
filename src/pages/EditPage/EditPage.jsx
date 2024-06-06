@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import supabase from '../../api/supabase.client';
 import {
     Form,
@@ -10,7 +10,8 @@ import {
     RemoveButton,
     PostContent,
     SubmitButton,
-    ButtonContainer
+    ButtonContainer,
+    MainButton // MainButton 스타일 추가
 } from './EditPage.styled';
 
 // 이미지의 공개 URL을 가져오는 함수
@@ -23,6 +24,7 @@ const getAvatarPublicUrl = (imagePath) => {
 
 const EditPage = () => {
     const { postId } = useParams(); // URL 매개변수에서 postId 가져오기
+    const navigate = useNavigate(); // 페이지 이동을 위한 useNavigate 훅
     const [image, setImage] = useState(null); // 사용자가 업로드한 이미지 파일 저장
     const [preview, setPreview] = useState(null); // 이미지 파일의 미리보기를 저장
     const [content, setContent] = useState(''); // 게시물의 내용을 저장
@@ -165,6 +167,7 @@ const EditPage = () => {
 
     return (
         <Form onSubmit={handleSubmit}>
+            <MainButton onClick={() => navigate('/main')}>Main</MainButton>
             <ImageUpload
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}

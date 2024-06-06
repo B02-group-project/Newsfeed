@@ -21,6 +21,5 @@ export const getAvatarPublicUrl = (imagePath) => {
   const { data } = supabase.storage
     .from("avatars")
     .getPublicUrl(String(imagePath));
-  console.log(data);
   return data.publicUrl;
 };
