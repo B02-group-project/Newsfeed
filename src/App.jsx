@@ -1,3 +1,7 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import CreatePage from './pages/CreatePage/CreatePage';
+import EditPage from './pages/EditPage/EditPage';
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import { ModalProvider } from "./contexts/modal.context";
