@@ -22,7 +22,7 @@ const router = createBrowserRouter([
   },
   
   {
-     path: "/mypage/:userId",
+    path: "/mypage/:userId",
     element: <MyPage />,
   },
   {
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     element: <CreatePage />
   },
   {
-    path: "/edit",
+    path: "/edit/:postId",
     element: <EditPage />
   },
 
