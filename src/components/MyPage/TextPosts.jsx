@@ -1,6 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const TextPosts = ({ posts }) => {
+  return (
+    <TextPostList>
+      {posts.map((post, index) => (
+        <TextPostItem key={index}>
+          <PostTitle>{post.content}</PostTitle>
+          <PostExcerpt>{post.excerpt}</PostExcerpt>
+        </TextPostItem>
+      ))}
+    </TextPostList>
+  );
+};
+
+export default TextPosts;
+
+
 const TextPostList = styled.ul`
 text-align: center;
 justify-content: center;
@@ -26,18 +42,3 @@ const PostExcerpt = styled.p`
   margin: 10px 0 0;
   color: #666;
 `;
-
-const TextPosts = ({ posts }) => {
-  return (
-    <TextPostList>
-      {posts.map((post, index) => (
-        <TextPostItem key={index}>
-          <PostTitle>{post.title}</PostTitle>
-          <PostExcerpt>{post.excerpt}</PostExcerpt>
-        </TextPostItem>
-      ))}
-    </TextPostList>
-  );
-};
-
-export default TextPosts;
