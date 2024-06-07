@@ -2,11 +2,13 @@ import styled from 'styled-components';
 
 export const PostItemWrapper = styled.div`
     width: 350px;
+    min-height: 400px;
     margin: 20px auto;
     border-radius: 3px;
     background-color: #ffffff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    position: relative;
 `;
 
 export const UserInfo = styled.div`
@@ -26,7 +28,7 @@ export const PostDate = styled.div`
 export const ToggleMenu = styled.div`
     cursor: pointer;
     padding: 5px;
-    font-size: 1.5em;
+    font-size: 20px;
 `;
 
 export const DropdownMenu = styled.ul`
@@ -60,11 +62,17 @@ export const PostContent = styled.div`
 `;
 
 export const LikeCheckbox = styled.input`
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
     display: none;
 `;
 
 export const Label = styled.label`
-    padding: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 40px;
+    padding: 10px;
     display: flex;
     align-items: center;
     cursor: pointer;

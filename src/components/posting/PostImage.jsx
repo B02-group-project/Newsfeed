@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
+// import React from 'react';
 import styled from 'styled-components';
 import LeftArrowIcon from '../../assets/Icons/left_arrow_icon.png';
 import RightArrowIcon from '../../assets/Icons/right_arrow_icon.png';
 
-const Carousel = () => {
-    const images = [
-        'https://i.ibb.co/T2wt7rD/image1.jpg',
-        'https://i.ibb.co/5spjPWQ/image2.jpg',
-        'https://i.ibb.co/tPsKvJT/image3.jpg',
-        'https://i.ibb.co/bv902pZ/image4.jpg',
-        'https://i.ibb.co/QC0CdZK/image5.jpg',
-        'https://i.ibb.co/hgDdwhm/image6.jpg',
-    ];
-
+const Carousel = ({ images }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    if (!images || images.length === 0) {
+        return <div></div>;
+    }
 
     const handlePrevClick = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
@@ -28,7 +24,7 @@ const Carousel = () => {
             <ButtonLeft onClick={handlePrevClick}>
                 <ArrowImage src={LeftArrowIcon} alt="Previous" />
             </ButtonLeft>
-            <PostImage imageUrl={images[currentImageIndex]} />
+            <PostImage imageUrl={images} />
             <ButtonRight onClick={handleNextClick}>
                 <ArrowImage src={RightArrowIcon} alt="Next" />
             </ButtonRight>
@@ -50,7 +46,6 @@ export const PostImage = ({ imageUrl }) => (
         <img src={imageUrl} alt="Post" />
     </Postimage>
 );
-
 const Postimage = styled.div`
     position: relative;
     width: 200px;

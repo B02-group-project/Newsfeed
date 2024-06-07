@@ -6,8 +6,8 @@ export const CommetItemWrapper = styled.div`
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    padding: 16px;
-    margin: 10px 0;
+    padding: 0 10px;
+    margin: 5px 0;
 `;
 
 export const UserInfo = styled.div`
@@ -15,7 +15,6 @@ export const UserInfo = styled.div`
     align-items: center;
     justify-content: space-between;
     position: relative;
-    margin-bottom: 10px;
 `;
 
 export const CommetDate = styled.div`
@@ -25,24 +24,24 @@ export const CommetDate = styled.div`
 
 export const ToggleMenu = styled.div`
     cursor: pointer;
-    font-size: 24px;
+    font-size: 20px;
     color: #333;
 `;
 
 export const DropdownMenu = styled.ul`
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: 0;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     list-style: none;
-    padding: 10px;
+    padding: 5px;
     z-index: 10;
 
     li {
-        padding: 8px 12px;
+        padding: 4px 8px;
         cursor: pointer;
         transition: background-color 0.2s;
 
