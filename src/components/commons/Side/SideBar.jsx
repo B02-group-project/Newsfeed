@@ -49,6 +49,10 @@ const SideBar = ({ isOpen, onClose }) => {
         fetchData();
     }, []);
 
+    const handleMyPage = () => {
+        navigate('/mypage/:userId');
+    };
+
     const handlesearchButton = () => {
         searchModal.open({
             title: '검색',
@@ -80,7 +84,7 @@ const SideBar = ({ isOpen, onClose }) => {
                 <List>
                     <Log width={'200px'} height={'50px'} left={'45%'} />
                     <TextList>
-                        <TextItem>
+                        <TextItem onClick={handleMyPage}>
                             <IconImg src={HomeIcon} />
                             main
                         </TextItem>
