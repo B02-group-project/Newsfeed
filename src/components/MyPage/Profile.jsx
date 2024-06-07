@@ -3,7 +3,7 @@ import ProfilePhoto from './ProfilePhoto';
 import Navigation from './Navigation';
 import { useProfile } from '../../contexts/ProfileContext';
 
-const Profile = ({ userId }) => {
+const Profile = ({ userInfo }) => {
     const { profile } = useProfile();
 
     if (!profile) {
@@ -16,15 +16,13 @@ const Profile = ({ userId }) => {
 
     return (
         <ProfileContainer>
-            <NavigationAndPhotoContainer>
-                <ProfilePhoto src={profile.photo || 'default_image_url'} />
-                <Navigation
-                    userInfo={userId}
-                    initialPostCount={postCount}
-                    initialFollowerCount={followerCount}
-                    initialFollowingCount={followingCount}
-                />
-            </NavigationAndPhotoContainer>
+            <Navigation
+                userInfo={userInfo}
+                initialPostCount={postCount}
+                initialFollowerCount={followerCount}
+                initialFollowingCount={followingCount}
+            />
+            <ProfilePhoto src={profile.photo || 'default_image_url'} />
         </ProfileContainer>
     );
 };
@@ -35,6 +33,8 @@ const ProfileContainer = styled.div`
     display: flex;
     flex-direction: column;
 `;
+
+// Other styled components...
 
 const NavigationAndPhotoContainer = styled.div`
     display: flex;
