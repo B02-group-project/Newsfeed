@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import PostItem from './PostItem';
-import CommetComp from './CommetComp';
-import { PostboxWrapper } from './style/Postbox.styled';
-import supabase from '../../api/supabase.client';
+import React, { useState, useEffect } from "react";
+import PostItem from "./PostItem";
+import CommetComp from "./CommetComp";
+import { PostboxWrapper } from "./style/Postbox.styled";
+import supabase from "../../api/supabase.client";
 
 const Postbox = () => {
-    const [posts, setPosts] = useState([]);
-    const [likedPosts, setLikedPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
 
-    // const { data, error } = await supabase
-    // .from('userInfo') // userInfo에서
-    // .select() // 전부다가져와라
-    // .eq('id', `${props.id}`) // id === props.id
+  // const { data, error } = await supabase
+  // .from('userInfo') // userInfo에서
+  // .select() // 전부다가져와라
+  // .eq('id', `${props.id}`) // id === props.id
 
     useEffect(() => {
         fetchData();

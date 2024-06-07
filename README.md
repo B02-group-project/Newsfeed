@@ -12,25 +12,24 @@
 
 # 프로젝트명
 무슨 프로젝트인가요?
-블랙베리 
+블랙베리 SNS 웹사이트 
 
 <br />
 
 ## 👥 팀원소개
 
-| 김민곤 | 김성준 | 김영 | 박성운 | 신자영 |
+| 김민곤 | 김성준 | 김영은 | 박성욱 | 신자영 |
 | :---: | :---: | :---: | :---: | :---: |
 | <img src="https://avatars.githubusercontent.com/MinKonKim" width="200"> | <img src="https://avatars.githubusercontent.com/ilovezerocokeya" width="200"> | <img src="https://avatars.githubusercontent.com/youngeun0407" width="200"> | <img src="https://avatars.githubusercontent.com/SecretCandy" width="200"> | <img src="https://avatars.githubusercontent.com/tpring" width="200"> |
 | 리더 | 부리더 | 팀원 | 팀원 | 팀원 |
-| [MinKonKim](https://github.com/MinKonKim) | [SecretCandy](https://github.com/SecretCandy) | [ilovezerocokeya](https://github.com/ilovezerocokeya) | [youngeun0407](https://github.com/youngeun0407)|  [tpring](https://github.com/tpring) |    
+| [MinKonKim](https://github.com/MinKonKim) | [ilovezerocokeya](https://github.com/ilovezerocokeya) | [youngeun0407](https://github.com/youngeun0407) | [SecretCandy](https://github.com/SecretCandy)|  [tpring](https://github.com/tpring) |    
 
 
 
 <br />
 
 ## 🛠️ 기술 스택
-<img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white"><img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white"><img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=white">
-
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"><img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=white"><img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"><img src="https://img.shields.io/badge/supabase-FCF8E?style=for-the-badge&logo=supabase&logoColor=black"><img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=black"> 
 <br />
 
 ## 📝 주요 기능
